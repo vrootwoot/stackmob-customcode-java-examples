@@ -11,3 +11,7 @@ This repository includes example Custom Code implementations that demonstrate:
 You can fork this repository and <a href="https://dashboard.stackmob.com/module/customcode/upload_github">link this repository with StackMob</a> directly with your app, allowing you to use the methods immediately.
 
 Start trying Custom Code with this ready-to-go repository!
+
+
+
+- requires the <a href="http://marketplace.stackmob.com/module/customcode">StackMob Custom Code Module</a> to be installed for your app
