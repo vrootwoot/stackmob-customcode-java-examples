@@ -43,6 +43,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
     JSONArray create_list;
+    JSONArray create_table_contents;
     JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
