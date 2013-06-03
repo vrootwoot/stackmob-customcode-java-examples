@@ -9,10 +9,7 @@ import com.stackmob.core.rest.ResponseToProcess;
 import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.*;
 
 import java.net.HttpURLConnection;
 import java.util.*;
