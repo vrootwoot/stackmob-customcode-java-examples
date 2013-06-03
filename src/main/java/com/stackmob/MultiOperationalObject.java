@@ -58,11 +58,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
       Object obj = parser.parse(request.getBody());
       JSONObject jsonObject = (JSONObject) obj;
       // Fetch the values passed in by the user from the body of JSON
-      create_list = (JSONObject) jsonObject.get("create");
+      
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
-        JSONArray data = create_list.getJSONArray();
+       JSONArray data = jsonObject.getJSONArray("create");
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
