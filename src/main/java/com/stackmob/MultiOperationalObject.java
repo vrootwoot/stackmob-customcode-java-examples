@@ -67,10 +67,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
-    String s = "{menu:{\"1\":\"sql\", \"2\":\"android\", \"3\":\"mvc\"}}";
-    JSONObject jObject  = new JSONObject(s);
-    JSONObject menu = jObject.getJSONObject("menu");
-    
     /*
     if (Util.hasNulls(create_list) && Util.hasNulls(update_list) && Util.hasNulls(delete_list)){
       return Util.badRequestResponse(errMap);
