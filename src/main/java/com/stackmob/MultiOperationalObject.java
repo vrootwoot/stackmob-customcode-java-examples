@@ -87,16 +87,16 @@ public class MultiOperationalObject implements CustomCodeMethod {
         {
             Map<String, SMValue> feedback = new HashMap<String, SMValue>();
             // loop through each column within array == table column
-            for (int l=0; create_list[i][k].length(); k++)
+            for (int l=0; create_list[i][k].length(); l++)
             {
-                if (create_list[i][k][l]['type']=='list') {
-                }else if (create_list[i][k][l]['type']=='map') {
+                if (create_list[i][k][l]['type'].equals('list')) {
+                }else if (create_list[i][k][l]['type'].equals('map')) {
                     feedback.put(create_list[i][k][l]['name'], new SMMap(Map.parseMap(create_list[i][k][l]['value'])));
-                }else if (create_list[i][k][l]['type']=='string') {
+                }else if (create_list[i][k][l]['type'].equals('string')) {
                     feedback.put(create_list[i][k][l]['name'], new SMString(create_list[i][k][l]['value']));    
-                }else if (create_list[i][k][l]['type']=='long') {
+                }else if (create_list[i][k][l]['type'].equals('long')) {
                     feedback.put(create_list[i][k][l]['name'], new SMInt(Long.parseLong(create_list[i][k][l]['value'])));
-                }else if (create_list[i][k][l]['type']=='double') {
+                }else if (create_list[i][k][l]['type'].equals('double')) {
                     feedback.put(create_list[i][k][l]['name'], new SMDouble(Double.parseLong(create_list[i][k][l]['value'])));
                 }
             }
