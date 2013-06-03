@@ -27,7 +27,12 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public String getMethodName() {
     return "Multi Operational";
   }
-
+  
+  @Override
+  public List<String> getParams() {
+    // Please note that the strings `user` and `username` are unsuitable for parameter names
+    return Arrays.asList("model","make","year");
+  }
 
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
@@ -60,10 +65,14 @@ public class MultiOperationalObject implements CustomCodeMethod {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
-
+    
+    /*
     if (Util.hasNulls(create_list) && Util.hasNulls(update_list) && Util.hasNulls(delete_list)){
       return Util.badRequestResponse(errMap);
     }
+    * 
+    */
+    
 
     DataService ds = serviceProvider.getDataService();
 
