@@ -37,7 +37,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
     Array update_list;
     Array delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
-
+    Map<String, String> errMap = new HashMap<String, String>();
+    
     LoggerService logger = serviceProvider.getLoggerService(MultiOperationalObject.class);
     logger.debug(request.getBody());
     
