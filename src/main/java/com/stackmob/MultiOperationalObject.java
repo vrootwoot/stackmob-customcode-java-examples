@@ -87,14 +87,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
     DataService ds = serviceProvider.getDataService();
     
 
-    for (int i = 0; i < create_list.length(); i++) {
-        create_list_inner = create_list[i].getJSONArray();
-    }
     
         
     // Creation 
     // loop through each table which needs entries creating
-    /*
+
     for (int i=0; i <= create_list.length; i++)
     {
         // loop through each entry which needs creating
@@ -103,6 +100,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             // loop through each column within array == table column
             for (int l=0; l <= create_list[i][k].length; l++)
             {
+                /*
                 if (create_list[i][k][l][0] instanceof String )
                 {
                     if (create_list[i][k][l][0].equals("list")) {
@@ -117,7 +115,12 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         //feedback.put(create_list[i][k][l][1], new SMDouble(Double.parseLong(create_list[i][k][l][2])));
                     }
                 }
-            }
+                * 
+                * 
+                * 
+                * 
+            */
+             }
             try {
               // Attempt to create object
               ds.createObject(create_list[i][k][l][3], new SMObject(feedback));
@@ -130,7 +133,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             }           
         }
     }
-    */
+
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
