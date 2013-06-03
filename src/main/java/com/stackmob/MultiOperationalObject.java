@@ -89,7 +89,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
             // loop through each column within array == table column
             for (int l=0; create_list[i][k].length(); l++)
             {
-                if (create_list[i][k][l]['type'].equals('list')) {
+                if (create_list[i][k][l][0].equals('list')) {
+                    feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
                 }else if (create_list[i][k][l]['type'].equals('map')) {
                     feedback.put(create_list[i][k][l]['name'], new SMMap(Map.parseMap(create_list[i][k][l]['value'])));
                 }else if (create_list[i][k][l]['type'].equals('string')) {
