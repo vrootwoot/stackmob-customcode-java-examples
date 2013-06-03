@@ -103,7 +103,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             {
                 create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
                 
-                if (create_table_contents[0] instanceof String )
+                if (create_table_contents.get(0) instanceof String )
                 {
                     if (create_table_contents[0].equals("list")) {
                         //feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
