@@ -93,12 +93,12 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
                 }else if (create_list[i][k][l][0].equals('map')) {
                     feedback.put(create_list[i][k][l][1], new SMMap(Map.parseMap(create_list[i][k][l][2])));
-                }else if (create_list[i][k][l]['type'].equals('string')) {
-                    feedback.put(create_list[i][k][l]['name'], new SMString(create_list[i][k][l]['value']));    
-                }else if (create_list[i][k][l]['type'].equals('long')) {
-                    feedback.put(create_list[i][k][l]['name'], new SMInt(Long.parseLong(create_list[i][k][l]['value'])));
-                }else if (create_list[i][k][l]['type'].equals('double')) {
-                    feedback.put(create_list[i][k][l]['name'], new SMDouble(Double.parseLong(create_list[i][k][l]['value'])));
+                }else if (create_list[i][k][l][0].equals('string')) {
+                    feedback.put(create_list[i][k][l][1], new SMString(create_list[i][k][l][2]));    
+                }else if (create_list[i][k][l][0].equals('long')) {
+                    feedback.put(create_list[i][k][l][1], new SMInt(Long.parseLong(create_list[i][k][l][2])));
+                }else if (create_list[i][k][l][0].equals('double')) {
+                    feedback.put(create_list[i][k][l][1], new SMDouble(Double.parseLong(create_list[i][k][l][2])));
                 }
             }
             try {
