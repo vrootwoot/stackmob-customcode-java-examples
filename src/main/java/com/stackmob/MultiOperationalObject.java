@@ -42,7 +42,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONObject create_list;
+    JSONArray create_list;
     JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
