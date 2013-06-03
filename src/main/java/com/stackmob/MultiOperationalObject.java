@@ -105,16 +105,16 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 
                 if (create_table_contents.get(0) instanceof String )
                 {
-                    if (create_table_contents[0].equals("list")) {
-                        //feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
-                    } else if (create_table_contents[0].equals("map")) {
-                        //feedback.put(create_list[i][k][l][1], new SMMap(Map.parseMap(create_list[i][k][l][2])));
-                    } else if (create_table_contents[0].equals("string")) {
-                        //feedback.put(create_list[i][k][l][1], new SMString(create_list[i][k][l][2]));    
-                    } else if (create_table_contents[0].equals("long")) {
-                        //feedback.put(create_list[i][k][l][1], new SMInt(Long.parseLong(create_list[i][k][l][2])));
-                    } else if (create_table_contents[0].equals("double")) {
-                        //feedback.put(create_list[i][k][l][1], new SMDouble(Double.parseLong(create_list[i][k][l][2])));
+                    if (create_table_contents.get(0).equals("list")) {
+                        feedback.put(create_table_contents.get(1), create_table_contents.get(2)));
+                    } else if (create_table_contents.get(0).equals("map")) {
+                        feedback.put(create_table_contents.get(1), create_table_contents.get(2)));
+                    } else if (create_table_contents.get(0).equals("string")) {
+                        feedback.put(create_table_contents.get(1), create_table_contents.get(2)));    
+                    } else if (create_table_contents.get(0).equals("long")) {
+                        feedback.put(create_table_contents.get(1), new SMInt(Long.parseLong(create_table_contents.get(2))));
+                    } else if (create_table_contents.get(0).equals("double")) {
+                        feedback.put(create_table_contents.get(1), new SMDouble(Double.parseLong(create_table_contents.get(2))));
                     }
                 }
              }
