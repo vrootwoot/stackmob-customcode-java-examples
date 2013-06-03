@@ -37,7 +37,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONArray create_list;
+    String create_list[][][][];
     JSONObject update_list;
     JSONObject delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
