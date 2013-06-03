@@ -33,9 +33,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
     String carID = "";
     String year  = "";
-    Array create_list;
-    Array update_list;
-    Array delete_list;
+    String[] create_list;
+    String[] update_list;
+    String[] delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
     
@@ -52,7 +52,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JSONObject jsonObject = (JSONObject) obj;
 
       // Fetch the values passed in by the user from the body of JSON
-      create_list = (JSONArray)jsonObject.get("create");
+      create_list = jsonObject.get("create");
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
@@ -75,7 +75,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
         // loop through each entry which needs creating
         for (int k=0; create_list[i].length(); k++)
         {
-            Map<String, SMValue> feedback = new HashMap<String, SMValue>();
             // loop through each column within array == table column
             for (int l=0; create_list[i][k].length(); l++)
             {
