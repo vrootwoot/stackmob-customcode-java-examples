@@ -94,7 +94,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     for (int i=0; i <= create_list.length(); i++)
     {
-        JSONArray inner_create = create_list[i].getJSONArray();
+        JSONArray inner_create = create_list.getJSONArray(i);
         // loop through each entry which needs creating
         for (int k=0; k <= inner_create.length(); k++)
         {
