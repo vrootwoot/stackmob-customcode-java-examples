@@ -92,7 +92,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     // Creation 
     // loop through each table which needs entries creating
 
-    for (int i=0; i <= create_list.length; i++)
+    for (int i=0; i <= create_list.length(); i++)
     {
         // loop through each entry which needs creating
         for (int k=0; k <= create_list[i].length; k++)
