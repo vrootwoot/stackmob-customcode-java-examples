@@ -77,7 +77,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     DataService ds = serviceProvider.getDataService();
     
     
-    String mate[] = create_list.toJSONArray;
+    String mate[] = create_list.toJSONArray();
         
     // Creation 
     // loop through each table which needs entries creating
