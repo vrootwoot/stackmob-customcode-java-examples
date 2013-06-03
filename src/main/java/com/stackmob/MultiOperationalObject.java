@@ -33,6 +33,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
     String carID = "";
     String year  = "";
+    Array create_list;
+    Array update_list;
+    Array delete_list;
 
     LoggerService logger = serviceProvider.getLoggerService(MultiOperationalObject.class);
     logger.debug(request.getBody());
