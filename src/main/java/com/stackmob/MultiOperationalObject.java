@@ -1,5 +1,6 @@
 package com.stackmob.example.crud;
 
+
 import com.stackmob.core.InvalidSchemaException;
 import com.stackmob.core.DatastoreException;
 import com.stackmob.core.customcode.CustomCodeMethod;
@@ -66,6 +67,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
+    String s = "{menu:{\"1\":\"sql\", \"2\":\"android\", \"3\":\"mvc\"}}";
+    JSONObject jObject  = new JSONObject(s);
+    JSONObject menu = jObject.getJSONObject("menu");
+    
     /*
     if (Util.hasNulls(create_list) && Util.hasNulls(update_list) && Util.hasNulls(delete_list)){
       return Util.badRequestResponse(errMap);
@@ -76,7 +81,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     DataService ds = serviceProvider.getDataService();
     
-    Iterator<String> iter = create_list.keys();
+    Iterator<String> iter = menu.keys();
       while (iter.hasNext()) {
           String key = iter.next();
           try {
