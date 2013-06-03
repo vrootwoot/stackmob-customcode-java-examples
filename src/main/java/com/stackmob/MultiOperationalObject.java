@@ -90,13 +90,13 @@ public class MultiOperationalObject implements CustomCodeMethod {
             for (int l=0; create_list[i][k].length(); k++)
             {
                 if (create_list[i][k][l]['type']=='list') {
-                }elseif (create_list[i][k][l]['type']=='map') {
+                }else if (create_list[i][k][l]['type']=='map') {
                     feedback.put(create_list[i][k][l]['name'], new SMMap(Map.parseMap(create_list[i][k][l]['value'])));
-                }elsleif (create_list[i][k][l]['type']=='string') {
+                }else if (create_list[i][k][l]['type']=='string') {
                     feedback.put(create_list[i][k][l]['name'], new SMString(create_list[i][k][l]['value']));    
-                }elseif (create_list[i][k][l]['type']=='long') {
+                }else if (create_list[i][k][l]['type']=='long') {
                     feedback.put(create_list[i][k][l]['name'], new SMInt(Long.parseLong(create_list[i][k][l]['value'])));
-                }elseif (create_list[i][k][l]['type']=='double') {
+                }else if (create_list[i][k][l]['type']=='double') {
                     feedback.put(create_list[i][k][l]['name'], new SMDouble(Double.parseLong(create_list[i][k][l]['value'])));
                 }
             }
