@@ -100,26 +100,22 @@ public class MultiOperationalObject implements CustomCodeMethod {
             // loop through each column within array == table column
             for (int l=0; l <= create_list.getJSONArray(i).getJSONArray(k).length(); l++)
             {
-                /*
-                if (create_list[i][k][l][0] instanceof String )
+                create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
+                
+                if (create_table_contents[0] instanceof String )
                 {
-                    if (create_list[i][k][l][0].equals("list")) {
+                    if (create_table_contents[0].equals("list")) {
                         //feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
-                    } else if (create_list[i][k][l][0].equals("map")) {
+                    } else if (create_table_contents[0].equals("map")) {
                         //feedback.put(create_list[i][k][l][1], new SMMap(Map.parseMap(create_list[i][k][l][2])));
-                    } else if (create_list[i][k][l][0].equals("string")) {
+                    } else if (create_table_contents[0].equals("string")) {
                         //feedback.put(create_list[i][k][l][1], new SMString(create_list[i][k][l][2]));    
-                    } else if (create_list[i][k][l][0].equals("long")) {
+                    } else if (create_table_contents[0].equals("long")) {
                         //feedback.put(create_list[i][k][l][1], new SMInt(Long.parseLong(create_list[i][k][l][2])));
-                    } else if (create_list[i][k][l][0].equals("double")) {
+                    } else if (create_table_contents[0].equals("double")) {
                         //feedback.put(create_list[i][k][l][1], new SMDouble(Double.parseLong(create_list[i][k][l][2])));
                     }
                 }
-                * 
-                * 
-                * 
-                * 
-            */
              }
             try {
               // Attempt to create object
