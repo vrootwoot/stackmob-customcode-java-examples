@@ -81,7 +81,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     while (iter.hasNext()) {
         String key = iter.next();
         try {
-            Object value = json.get(key);
+            Object value = create_list.get(key);
         } catch (JSONException e) {
             // Something went wrong!
         }
