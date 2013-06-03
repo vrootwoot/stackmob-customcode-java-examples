@@ -37,7 +37,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONOject create_list;
+    JSONObject create_list;
     JSONObject update_list;
     JSONObject delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -82,7 +82,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         String key = iter.next();
         try {
             Object value = create_list.get(key);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             // Something went wrong!
         }
     }
