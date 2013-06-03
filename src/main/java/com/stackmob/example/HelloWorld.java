@@ -15,7 +15,6 @@
  */
 
 package com.stackmob.example;
-
 import com.stackmob.core.customcode.CustomCodeMethod;
 import com.stackmob.core.rest.ProcessedAPIRequest;
 import com.stackmob.core.rest.ResponseToProcess;
