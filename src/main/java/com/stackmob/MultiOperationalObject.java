@@ -70,6 +70,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
+    } catch (JSONException pe) {
+      logger.error(pe.getMessage(), pe);
+      return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
     /*
