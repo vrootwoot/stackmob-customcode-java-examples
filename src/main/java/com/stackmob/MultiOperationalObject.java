@@ -41,7 +41,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONObject create_list;
+    JSONArray create_list;
     JSONObject update_list;
     JSONObject delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -80,14 +80,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     DataService ds = serviceProvider.getDataService();
     
-    Iterator<?> keys = create_list.keys();
-
-        while( keys.hasNext() ){
-            String key = (String)keys.next();
-            if( jObject.get(key) instanceof JSONObject ){
-
-            }
-        }
+    Iterator<String> iter = create_list.keys();
+      while (iter.hasNext()) {
+          String key = iter.next();
+          try {
+              Object value = json.get(key);
+          } catch (JSONException e) {
+              // Something went wrong!
+          }
+      }
     
         
     // Creation 
