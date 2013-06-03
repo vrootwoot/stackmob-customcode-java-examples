@@ -36,10 +36,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
     Array create_list;
     Array update_list;
     Array delete_list;
+    Map<String, SMValue> feedback = new HashMap<String, SMValue>();
 
     LoggerService logger = serviceProvider.getLoggerService(MultiOperationalObject.class);
     logger.debug(request.getBody());
-    Map<String, String> errMap = new HashMap<String, String>();
+    
 
     /* The following try/catch block shows how to properly fetch parameters for PUT/POST operations
      * from the JSON request body
@@ -50,7 +51,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JSONObject jsonObject = (JSONObject) obj;
 
       // Fetch the values passed in by the user from the body of JSON
-      Array create_list = (JSONArray)jsonObject.get("create");
+      create_list = (JSONArray)jsonObject.get("create");
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
