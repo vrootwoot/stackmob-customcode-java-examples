@@ -33,9 +33,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
     String carID = "";
     String year  = "";
-    String[] create_list;
-    String[] update_list;
-    String[] delete_list;
+    String[][] create_list;
+    String[][] update_list;
+    String[][] delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
     
@@ -70,13 +70,13 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     // Creation 
     // loop through each table which needs entries creating
-    for (int i=0; create_list.length(); i++)
+    for (int i=0; i <= create_list.length(); i++)
     {
         // loop through each entry which needs creating
-        for (int k=0; create_list[i].length(); k++)
+        for (int k=0; k <= create_list[i].length(); k++)
         {
             // loop through each column within array == table column
-            for (int l=0; create_list[i][k].length(); l++)
+            for (int l=0; l <= create_list[i][k].length(); l++)
             {
                 if (create_list[i][k][l][0].equals("list")) {
                     //feedback.put(create_list[i][k][l][1], new SMList(List.parseList(create_list[i][k][l][2])));
