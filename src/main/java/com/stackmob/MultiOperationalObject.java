@@ -31,9 +31,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-    String carID = "";
-    String year  = "";
-    String[][][][] create_list;
+
+    String[][][] create_list;
     String[][][][] update_list;
     String[][][][] delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -70,13 +69,13 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     // Creation 
     // loop through each table which needs entries creating
-    for (int i=0; i <= create_list.length(); i++)
+    for (int i=0; i <= create_list.length; i++)
     {
         // loop through each entry which needs creating
-        for (int k=0; k <= create_list[i].length(); k++)
+        for (int k=0; k <= create_list[i].length; k++)
         {
             // loop through each column within array == table column
-            for (int l=0; l <= create_list[i][k].length(); l++)
+            for (int l=0; l <= create_list[i][k].length; l++)
             {
                 if (create_list[i][k][l][0] instanceof String )
                 {
@@ -95,7 +94,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             }
             try {
               // Attempt to create object
-              ds.createObject(create_list[i], new SMObject(feedback));
+              ds.createObject(create_list[i][k][l][3], new SMObject(feedback));
             }
             catch (InvalidSchemaException ise) {
               return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
