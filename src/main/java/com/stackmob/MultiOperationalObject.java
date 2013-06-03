@@ -61,15 +61,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
-        Iterator<String> iter = create_list.keys();
-      while (iter.hasNext()) {
-          String key = iter.next();
-          try {
-              Object value = create_list.get(key);
-          } catch (Exception e) {
-              // Something went wrong!
-          }
-      }
+        JSONArray data = response.getJSONArray("data");
+        
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
