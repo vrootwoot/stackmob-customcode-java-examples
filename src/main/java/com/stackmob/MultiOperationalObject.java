@@ -43,6 +43,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
     JSONObject create_list;
+    JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -86,11 +87,14 @@ public class MultiOperationalObject implements CustomCodeMethod {
     DataService ds = serviceProvider.getDataService();
     
 
+    for (int i = 0; i < create_list.length(); i++) {
+        create_list_inner = jsonObject.getJSONArray("create");
+    }
     
         
     // Creation 
     // loop through each table which needs entries creating
-    
+    /*
     for (int i=0; i <= create_list.length; i++)
     {
         // loop through each entry which needs creating
@@ -126,7 +130,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             }           
         }
     }
-    
+    */
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
