@@ -15,6 +15,10 @@ import org.json.simple.parser.ParseException;
 import java.net.HttpURLConnection;
 import java.util.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * This example will show a user how to write a custom code method
  * with two parameters that updates the specified object in their schema
