@@ -65,7 +65,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
-       JSONArray data = jsonObject.getJSONArray("create");
+       create_list = jsonObject.getJSONArray("create");
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
@@ -90,7 +90,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
     // Creation 
     // loop through each table which needs entries creating
-    /*
+    
     for (int i=0; i <= create_list.length; i++)
     {
         // loop through each entry which needs creating
@@ -126,7 +126,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             }           
         }
     }
-    */
+    
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
