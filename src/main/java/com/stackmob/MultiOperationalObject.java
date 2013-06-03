@@ -10,6 +10,7 @@ import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
