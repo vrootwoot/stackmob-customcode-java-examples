@@ -37,7 +37,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONObject create_list;
+    JSONArray create_list;
     JSONObject update_list;
     JSONObject delete_list;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -57,7 +57,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JSONObject jsonObject = (JSONObject) obj;
 
       // Fetch the values passed in by the user from the body of JSON
-      JSONArray create_list = jsonObject.getJSONArray(jsonObject.get("create"));
+      create_list = jsonObject.getJSONArray(jsonObject.get("create"));
       //update_list = (JSONArray)jsonObject.get("update");
       //delete_list = (JSONArray)jsonObject.get("delete");
       
