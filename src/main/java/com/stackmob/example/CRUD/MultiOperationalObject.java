@@ -36,7 +36,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public List<String> getParams() {
     // Please note that the strings `user` and `username` are unsuitable for parameter names
-    return Arrays.asList("data");
+    return Arrays.asList("object_operations");
   }
   /*
   private List<String> convertJsonToList(JSONObject j) {
@@ -90,7 +90,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONParser parser = new JSONParser();
     try {
         
-      Object obj = parser.parse(request.getBody());
+      Object obj = parser.parse(request.getParams().get("object_operations"));
       JSONObject jsonObject = (JSONObject) obj;
       // Fetch the values passed in by the user from the body of JSON
       
