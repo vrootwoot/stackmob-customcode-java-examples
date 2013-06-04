@@ -109,9 +109,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
             for (int k=0; k <= create_tables.length(); k++)
             {
                 // loop through each column within array == table column
-                    
+                    try {
                       create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
-                    
+                    } catch (JSONException e) {
+                      return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
+                    }
                     
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
@@ -124,9 +126,19 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
                         
                         if (table_column_data_type.equals("list")) {
-                         //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
+                            try {
+                               // feedback.put(table_column_name, new SMList(String.valueOf(create_table_contents.get(2))));
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }                                
                         } else if (table_column_data_type.equals("map")) {
-                         //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(String.valueOf(create_table_contents.get(2))));
+                            try {
+                                //feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }                            
                         } else if (table_column_data_type.equals("string")) {
                             try {
                                 feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
@@ -135,9 +147,19 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
                         } else if (table_column_data_type.equals("long")) {
-                        //    feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
+                            try {
+                                feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }                            
                         } else if (table_column_data_type.equals("double")) {
-                        //    feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
+                            try {
+                                feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }                                                        
                         }
 
                      }
