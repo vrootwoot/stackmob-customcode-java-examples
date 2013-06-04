@@ -39,13 +39,13 @@ public class MultiOperationalObject implements CustomCodeMethod {
     return Arrays.asList("create","update","delete");
   }
   
-  private List<String> convertJsonToList(JSONArray j) {
-      
+  private List<String> convertJsonToList(JSONObject j) {
+        JSONArray temp = j.getJSONArray();
         ArrayList<String> list = new ArrayList<String>();     
-        if (j != null) { 
-           int len = j.length();
+        if (temp != null) { 
+           int len = temp.length();
            for (int i=0;i<len;i++){ 
-            list.add(j.get(i).toString());
+            list.add(temp.get(i).toString());
            } 
         }
         return list;
@@ -96,7 +96,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     }
     
     
-    if (Util.hasNulls(create_list) && Util.hasNulls(update_list) && Util.hasNulls(delete_list)){
+    if ((create_list.length()==0) && (update_list.length()==0) && (delete_list.length()==0)){
       return Util.badRequestResponse(errMap);
     }
     
@@ -158,7 +158,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             }
                         }  else if (table_column_data_type.equals("boolean")) {
                             try {
-                                feedback.put(table_column_name, new SMBoolean(String.valueOf(create_table_contents.get(2))));    
+                                feedback.put(table_column_name, new SMValue(String.valueOf(create_table_contents.get(2))));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -166,7 +166,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
                         else if (table_column_data_type.equals("integer")) {
                             try {
-                                feedback.put(table_column_name, new SMInt(String.valueOf(create_table_contents.get(2))));    
+                                feedback.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
