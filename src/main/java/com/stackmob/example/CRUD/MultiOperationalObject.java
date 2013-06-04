@@ -226,7 +226,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                           // Attempt to create object
                             if (!do_not_save) {
                                 result = ds.createObject(String.valueOf(create_table_contents.get(3)), new SMObject(creation));
-                                feedback("created object",result);
+                                feedback.put("created object",result);
                             }
                         }
                         catch (InvalidSchemaException ise) {
@@ -366,7 +366,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     {
         try {
             delete_row = delete_list.getJSONArray(i);
-            ds.deleteObject(delete_row[1].toString(), delete_row[0].toString()); // Finally the object gets deleted by ID.
+            ds.deleteObject(delete_row.get(1).toString(), delete_row.get(0).toString()); // Finally the object gets deleted by ID.
         } catch (JSONException e) {
           return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
         }            
