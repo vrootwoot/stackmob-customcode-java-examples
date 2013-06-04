@@ -36,7 +36,19 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public List<String> getParams() {
     // Please note that the strings `user` and `username` are unsuitable for parameter names
-    return Arrays.asList("model","make","year");
+    return Arrays.asList("create","update","delete");
+  }
+  
+  private List<String> convertJsonToList(JSONArray j) {
+      
+        ArrayList<String> list = new ArrayList<String>();     
+        if (j != null) { 
+           int len = j.length();
+           for (int i=0;i<len;i++){ 
+            list.add(j.get(i).toString());
+           } 
+        }
+        return list;
   }
 
   @Override
@@ -47,11 +59,12 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONArray create_tables = new JSONArray();
     JSONArray create_table_columns = new JSONArray();
     JSONObject create_list_inner;
-    JSONObject update_list;
-    JSONObject delete_list;
-    JSONArray table_columns = new JSONArray();
     String table_column_name;
-    String table_column_data_type;
+    String table_column_data_type;    
+    
+    JSONArray update_list = new JSONArray();
+    JSONArray delete_list = new JSONArray();
+    JSONArray table_columns = new JSONArray();
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
     
@@ -69,10 +82,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JSONObject jsonObject = (JSONObject) obj;
       // Fetch the values passed in by the user from the body of JSON
       
-      //update_list = (JSONArray)jsonObject.get("update");
-      //delete_list = (JSONArray)jsonObject.get("delete");
-      
-       create_list = jsonObject.getJSONArray("create");
+
+      create_list = jsonObject.getJSONArray("create");
+      delete_list = jsonObject.getJSONArray("delete");
+      update_list = jsonObject.getJSONArray("update");
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
@@ -82,12 +95,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
-    /*
+    
     if (Util.hasNulls(create_list) && Util.hasNulls(update_list) && Util.hasNulls(delete_list)){
       return Util.badRequestResponse(errMap);
     }
-    * 
-    */
+    
     
 
     DataService ds = serviceProvider.getDataService();
@@ -108,6 +120,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
             // loop through each entry which needs creating
             for (int k=0; k <= create_tables.length(); k++)
             {
+                // empty feedback map as new table entry is being creared
+                feedback.clear();
                 // loop through each column within array == table column
                     try {
                       create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
@@ -125,17 +139,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                           return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                         }
                         
-                        if (table_column_data_type.equals("list")) {
-                            /*
-                            try {
-                                feedback.put(table_column_name, new SMList(String.valueOf(create_table_contents.get(2))));
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            } 
-                            */
-                            
-                        } else if (table_column_data_type.equals("map")) {
+                        if (table_column_data_type.equals("map")) {
                             /*
                             try {
                                feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
@@ -152,7 +156,31 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
-                        } else if (table_column_data_type.equals("long")) {
+                        }  else if (table_column_data_type.equals("boolean")) {
+                            try {
+                                feedback.put(table_column_name, new SMBoolean(String.valueOf(create_table_contents.get(2))));    
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }
+                        }
+                        else if (table_column_data_type.equals("integer")) {
+                            try {
+                                feedback.put(table_column_name, new SMInt(String.valueOf(create_table_contents.get(2))));    
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }
+                        }                        
+                        else if (table_column_data_type.equals("list")) {
+                            try {
+                                feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }
+                        }                                                
+                        else if (table_column_data_type.equals("long")) {
                             try {
                                 feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                             }
@@ -183,7 +211,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
                           return Util.internalErrorResponse("json_exception", json, errMap);  // http 500 - internal server error
                         }                            
             }
-        
     }
     
 
