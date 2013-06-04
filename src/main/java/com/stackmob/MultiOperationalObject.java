@@ -106,15 +106,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 if (create_table_contents.get(0) instanceof String )
                 {
                     if (create_table_contents.get(0).equals("list")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
+                     //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
                     } else if (create_table_contents.get(0).equals("map")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(String.valueOf(create_table_contents.get(2))));
+                     //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(String.valueOf(create_table_contents.get(2))));
                     } else if (create_table_contents.get(0).equals("string")) {
                         feedback.put(String.valueOf(create_table_contents.get(1)), new SMString(String.valueOf(create_table_contents.get(2))));    
                     } else if (create_table_contents.get(0).equals("long")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMLong(Long.parseLong(create_table_contents.get(2))));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                     } else if (create_table_contents.get(0).equals("double")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMDouble(Double.parseDouble(create_table_contents.get(2))));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                     }
                 }
              }
