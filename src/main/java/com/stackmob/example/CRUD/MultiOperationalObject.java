@@ -114,10 +114,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
       logger.debug("trying to grab json arrays");
       
 
+      JSONArray parent_ops = (JSONArray)obj;
       
-      //create_list = jsonObject.getJSONArray("create");
-      //delete_list = jsonObject.getJSONArray("delete");
-      //update_list = jsonObject.getJSONArray("update");
+      create_list = parent_ops.get("create");
+      delete_list = parent_ops.get("delete");
+      update_list = parent_ops.get("update");
         
       
     } catch (ParseException pe) {
