@@ -373,6 +373,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
         catch (InvalidSchemaException ise) {
           return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
         }        
+        catch (DatastoreException dse) {
+          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
+        }        
     }    
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
