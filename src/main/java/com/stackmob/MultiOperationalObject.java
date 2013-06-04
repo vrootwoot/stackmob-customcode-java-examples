@@ -38,7 +38,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     // Please note that the strings `user` and `username` are unsuitable for parameter names
     return Arrays.asList("create","update","delete");
   }
-  
+  /*
   private List<String> convertJsonToList(JSONObject j) {
         JSONArray temp = j.getJSONArray(0);
         ArrayList<String> list = new ArrayList<String>();     
@@ -50,7 +50,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
         }
         return list;
   }
-
+*/
+  
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
@@ -158,7 +159,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             }
                         }  else if (table_column_data_type.equals("boolean")) {
                             try {
-                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2))));    
+                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -171,7 +172,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
-                        }                        
+                        }   
+                        /*
                         else if (table_column_data_type.equals("list")) {
                             try {
                                 feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
@@ -179,8 +181,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
-                        }                                                
-                        else if (table_column_data_type.equals("long")) {
+                        } 
+                        */ 
+                        
+                       else if (table_column_data_type.equals("long")) {
                             try {
                                 feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                             }
