@@ -292,7 +292,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     for (int l=0; l <= update_table_columns.length(); l++)
                     {
                         try {
-                            update_table_contents = update_table_columns.get(l);
+                            update_table_contents = (JSONArray)update_table_columns.get(l);
                             update_column_data_type = String.valueOf(update_table_contents.get(0));
                             update_column_name = String.valueOf(update_table_contents.get(1));
                         } catch (JSONException e) {
