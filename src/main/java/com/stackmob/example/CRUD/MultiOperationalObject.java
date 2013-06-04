@@ -102,9 +102,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
           String s=request.getParams().get("object_operations");
           
-          Object obj=JSONValue.parse(s);
+          JSONArray obj = JSONArray.parse(s);
           
-          JSONArray arrayZZ =(JSONArray)obj;
+          //JSONArray arrayZZ =(JSONArray)obj;
           
           
       
