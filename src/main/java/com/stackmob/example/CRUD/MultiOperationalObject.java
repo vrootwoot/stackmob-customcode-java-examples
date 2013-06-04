@@ -73,6 +73,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONArray delete_list = new JSONArray();
     JSONArray table_columns = new JSONArray();
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
+    Map<String, SMValue> creation = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
     List<SMUpdate> update = new ArrayList<SMUpdate>();
     SMObject result;
@@ -130,7 +131,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
             for (int k=0; k <= create_tables.length(); k++)
             {
                 // empty feedback map as new table entry is being creared
-                feedback.clear();
+                creation.clear();
                 // loop through each column within array == table column
                     try {
                       create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
@@ -161,6 +162,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         } else if (table_column_data_type.equals("string")) {
                             try {
                                 feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
+                                creation.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -168,6 +170,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }  else if (table_column_data_type.equals("boolean")) {
                             try {
                                 feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())));    
+                                creation.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -176,6 +179,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         else if (table_column_data_type.equals("integer")) {
                             try {
                                 feedback.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))));    
+                                creation.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -195,6 +199,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                        else if (table_column_data_type.equals("long")) {
                             try {
                                 feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
+                                creation.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -202,6 +207,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         } else if (table_column_data_type.equals("double")) {
                             try {
                                 feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
+                                creation.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
@@ -211,7 +217,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                      }
                         try {
                           // Attempt to create object
-                          ds.createObject(String.valueOf(create_table_contents.get(3)), new SMObject(feedback));
+                          result = ds.createObject(String.valueOf(create_table_contents.get(3)), new SMObject(creation));
+                          feedback("created object",result);
                         }
                         catch (InvalidSchemaException ise) {
                           return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
@@ -271,6 +278,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             
                         } else if (table_column_data_type.equals("string")) {
                             try {
+                                feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));
                                 update.add(new SMSet(table_column_name, new SMString(String.valueOf(create_table_contents.get(2)) )));
                             }
                             catch (JSONException e) {
@@ -278,6 +286,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             }
                         }  else if (table_column_data_type.equals("boolean")) {
                             try {
+                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())) );
                                 update.add(new SMSet(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())) ));    
                             }
                             catch (JSONException e) {
@@ -286,6 +295,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
                         else if (table_column_data_type.equals("integer")) {
                             try {
+                                feedback.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))) );                                
                                 update.add(new SMSet(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))) ));                                    
                             }
                             catch (JSONException e) {
@@ -305,6 +315,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         
                        else if (table_column_data_type.equals("long")) {
                             try {
+                                feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))) );                                                                
                                 update.add(new SMSet(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))) ));                                                                    
                             }
                             catch (JSONException e) {
@@ -312,6 +323,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             }                            
                         } else if (table_column_data_type.equals("double")) {
                             try {
+                                feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))) );
                                 update.add(new SMSet(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))) ));                                                                    
                             }
                             catch (JSONException e) {
@@ -323,6 +335,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         try {
                           // Attempt to update object
                             result = ds.updateObject(String.valueOf(create_table_contents.get(3)), new SMString(update_primary_key), update);
+                            feedback.put("updated object", result);
                         }
                         catch (InvalidSchemaException ise) {
                           return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
