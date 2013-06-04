@@ -94,7 +94,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JSONObject jsonObject = (JSONObject) obj;
       // Fetch the values passed in by the user from the body of JSON
       
-
+      logger.debug('trying to grab json arrays');
       create_list = jsonObject.getJSONArray("create");
       delete_list = jsonObject.getJSONArray("delete");
       update_list = jsonObject.getJSONArray("update");
@@ -112,7 +112,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       return Util.badRequestResponse(errMap);
     }
     
-    
+    logger.debug('grabbed json arrays, proceeding to operations');
 
     DataService ds = serviceProvider.getDataService();
     
