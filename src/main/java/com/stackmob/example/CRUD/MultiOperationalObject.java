@@ -14,7 +14,8 @@ import org.json.simple.parser.ParseException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+//import org.json.JSONObject;
+import org.json.simple.JSONObject;
  
 
 import java.net.HttpURLConnection;
@@ -93,7 +94,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
       
-      JSONObject jsonObject = (JSONObject) parser.parse(request.getParams().get("object_operations"));  
+       org.json.simple.JSONObject jsonObject = null;
+       
+        Object obj = parser.parse(request.getParams().get("object_operations"));
+        jsonObject=(org.json.simple.JSONObject)obj;       
 
       
       // Fetch the values passed in by the user from the body of JSON
