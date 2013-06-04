@@ -106,11 +106,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 if (create_table_contents.get(0) instanceof String )
                 {
                     if (create_table_contents.get(0).equals("list")) {
-                        feedback.put(create_table_contents.get(1), create_table_contents.get(2));
+                        feedback.put(create_table_contents.get(1), new SMList(create_table_contents.get(2)));
                     } else if (create_table_contents.get(0).equals("map")) {
-                        feedback.put(create_table_contents.get(1), create_table_contents.get(2));
+                        feedback.put(create_table_contents.get(1), new SMMap(create_table_contents.get(2)));
                     } else if (create_table_contents.get(0).equals("string")) {
-                        feedback.put(create_table_contents.get(1), create_table_contents.get(2));    
+                        feedback.put(create_table_contents.get(1), new SMString(create_table_contents.get(2)));    
                     } else if (create_table_contents.get(0).equals("long")) {
                         feedback.put(create_table_contents.get(1), new SMInt(Long.parseLong(create_table_contents.get(2))));
                     } else if (create_table_contents.get(0).equals("double")) {
