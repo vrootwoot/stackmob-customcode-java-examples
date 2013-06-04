@@ -112,15 +112,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     } else if (create_table_contents.get(0).equals("string")) {
                         feedback.put(create_table_contents.get(1), new SMString(create_table_contents.get(2)));    
                     } else if (create_table_contents.get(0).equals("long")) {
-                        feedback.put(create_table_contents.get(1), new SMInt(Long.parseLong(create_table_contents.get(2))));
+                        feedback.put(create_table_contents.get(1), new SMLong((long)(create_table_contents.get(2))));
                     } else if (create_table_contents.get(0).equals("double")) {
-                        feedback.put(create_table_contents.get(1), new SMDouble(Double.parseLong(create_table_contents.get(2))));
+                        feedback.put(create_table_contents.get(1), new SMDouble((double)(create_table_contents.get(2))));
                     }
                 }
              }
             try {
               // Attempt to create object
-              ds.createObject(create_list[i][k][l][3], new SMObject(feedback));
+              ds.createObject(create_table_contents.get(3), new SMObject(feedback));
             }
             catch (InvalidSchemaException ise) {
               return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
