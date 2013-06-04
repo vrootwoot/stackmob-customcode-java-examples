@@ -109,8 +109,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
             for (int k=0; k <= create_tables.length(); k++)
             {
                 // loop through each column within array == table column
-                if (create_list.getJSONArray(i).getJSONArray(k) instanceof JSONArray)
-                {
                     try {
                       create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
                     } catch (JSONException e) {
@@ -155,8 +153,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         catch (DatastoreException dse) {
                           return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
                         }                        
-                    
-                }
             }
         
     }
