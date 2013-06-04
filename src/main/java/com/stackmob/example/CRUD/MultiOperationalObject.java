@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
  
 
 import java.net.HttpURLConnection;
@@ -81,7 +81,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     SMObject result;
     
     LoggerService logger = serviceProvider.getLoggerService(MultiOperationalObject.class);
-    logger.debug(request.getBody());
+    logger.debug(request.getParams().get("object_operations"));
     
 
     /* The following try/catch block shows how to properly fetch parameters for PUT/POST operations
@@ -92,6 +92,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
       Object obj = parser.parse(request.getParams().get("object_operations"));
       JSONObject jsonObject = (JSONObject) obj;
+      
       // Fetch the values passed in by the user from the body of JSON
       
       logger.debug("trying to grab json arrays");
