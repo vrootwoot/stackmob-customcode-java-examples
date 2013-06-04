@@ -126,19 +126,25 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
                         
                         if (table_column_data_type.equals("list")) {
+                            /*
                             try {
-                               // feedback.put(table_column_name, new SMList(String.valueOf(create_table_contents.get(2))));
+                                feedback.put(table_column_name, new SMList(String.valueOf(create_table_contents.get(2))));
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }                                
+                            } 
+                            */
+                            
                         } else if (table_column_data_type.equals("map")) {
+                            /*
                             try {
-                                //feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
+                               feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }                            
+                            }  
+                            */
+                            
                         } else if (table_column_data_type.equals("string")) {
                             try {
                                 feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
