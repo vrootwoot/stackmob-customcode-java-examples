@@ -1,8 +1,8 @@
 package com.stackmob.example.crud;
 
 
-import com.stackmob.core.InvalidSchemaException;
 import com.stackmob.core.DatastoreException;
+import com.stackmob.core.InvalidSchemaException;
 import com.stackmob.core.customcode.CustomCodeMethod;
 import com.stackmob.core.rest.ProcessedAPIRequest;
 import com.stackmob.core.rest.ResponseToProcess;
