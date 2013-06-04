@@ -43,7 +43,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
     JSONArray create_list;
-    JSONArray create_table_contents;
+    JSONArray create_table_contents = new JSONArray();
     JSONArray create_tables;
     JSONArray create_table_columns;
     JSONObject create_list_inner;
@@ -100,8 +100,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     for (int i=0; i <= create_list.length(); i++)
     {
-        if (create_list.getJSONArray(i) instanceof JSONArray)
-        {
             try {
               create_tables = create_list.getJSONArray(i);
             } catch (JSONException e) {
@@ -122,7 +120,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
                         try {
-                            create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
+                            create_table_contents = create_table_columns.getJSONArray(l);
                             table_column_data_type = String.valueOf(create_table_contents.get(0));
                             table_column_name = String.valueOf(create_table_contents.get(1));
                         } catch (JSONException e) {
@@ -147,19 +145,20 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
 
                      }
-                    try {
-                      // Attempt to create object
-                      ds.createObject(String.valueOf(create_table_contents.get(3)), new SMObject(feedback));
-                    }
-                    catch (InvalidSchemaException ise) {
-                      return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
-                    }
-                    catch (DatastoreException dse) {
-                      return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-                    }
+                        try {
+                          // Attempt to create object
+                          ds.createObject(String.valueOf(create_table_contents.get(3)), new SMObject(feedback));
+                        }
+                        catch (InvalidSchemaException ise) {
+                          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
+                        }
+                        catch (DatastoreException dse) {
+                          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
+                        }                        
+                    
                 }
             }
-        }
+        
     }
     
 
