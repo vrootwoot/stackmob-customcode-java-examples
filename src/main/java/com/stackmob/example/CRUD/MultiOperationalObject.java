@@ -101,15 +101,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
-      //return Util.badRequestResponse(errMap, pe.getMessage());
+      return Util.badRequestResponse(errMap, pe.getMessage());
     } catch (JSONException pe) {
       logger.error(pe.getMessage(), pe);
-      //return Util.badRequestResponse(errMap, pe.getMessage());
+      return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
     
     if ((create_list.length()==0) && (update_list.length()==0) && (delete_list.length()==0)){
-      //return Util.badRequestResponse(errMap);
+      return Util.badRequestResponse(errMap);
     }
     
     
