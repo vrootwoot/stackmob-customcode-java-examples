@@ -94,19 +94,30 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
       
-       org.json.simple.JSONObject jsonObject = null;
-       
-        Object obj = parser.parse(request.getParams().get("object_operations"));
-        jsonObject=(org.json.simple.JSONObject)obj;       
+        
+        Object obj = JSONValue.parse(request.getParams().get("object_operations"));
+        
+         JSONArray temp = (JSONArray)obj;
+         
+         JSONArray create_list = temp.get("create");
+         JSONArray create_list = temp.get("delete");
+         JSONArray create_list = temp.get("update");
+         
+        
+        //jsonObject=(org.json.simple.JSONObject)obj;       
 
       
       // Fetch the values passed in by the user from the body of JSON
       
       logger.debug("trying to grab json arrays");
-      create_list = jsonObject.getJSONArray("create");
-      delete_list = jsonObject.getJSONArray("delete");
-      update_list = jsonObject.getJSONArray("update");
+      
+
+      
+      //create_list = jsonObject.getJSONArray("create");
+      //delete_list = jsonObject.getJSONArray("delete");
+      //update_list = jsonObject.getJSONArray("update");
         
+      
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
