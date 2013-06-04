@@ -270,7 +270,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     for (int i=0; i <= update_list.length(); i++)
     {
             try {
-              update_tables = update_list.getJSONArray(i);
+              update_tables = update_list.get(i);
             } catch (JSONException e) {
               return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
             }            
@@ -281,8 +281,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 update.clear();
                 // loop through each column within array == table column
                     try {
-                      update_primary_key = update_list.getJSONArray(i).getJSONArray(0).toString();
-                      update_table_columns = update_list.getJSONArray(i).getJSONArray(k);
+                      update_primary_key = update_list.get(i).get(0).toString();
+                      update_table_columns = update_list.get(i).get(k);
                     } catch (JSONException e) {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
@@ -290,7 +290,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
                         try {
-                            create_table_contents = create_table_columns.getJSONArray(l);
+                            create_table_contents = create_table_columns.get(l);
                             table_column_data_type = String.valueOf(update_table_contents.get(0));
                             table_column_name = String.valueOf(update_table_contents.get(1));
                         } catch (JSONException e) {
