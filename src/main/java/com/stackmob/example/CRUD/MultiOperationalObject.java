@@ -56,7 +56,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    //JSONArray create_list = new JSONArray();;
+    JSONArray create_list = new JSONArray();;
     JSONArray create_table_contents = new JSONArray();
     JSONArray create_tables = new JSONArray();
     JSONArray create_table_columns = new JSONArray();
@@ -65,14 +65,14 @@ public class MultiOperationalObject implements CustomCodeMethod {
     String table_column_data_type;    
     Boolean do_not_save = false;
     
-    //JSONArray update_list = new JSONArray();
+    JSONArray update_list = new JSONArray();
     JSONArray update_table_contents = new JSONArray();
     JSONArray update_tables = new JSONArray();
     JSONArray update_table_columns = new JSONArray();
     JSONObject updtae_list_inner;
     String update_primary_key;
     
-    //JSONArray delete_list = new JSONArray();
+    JSONArray delete_list = new JSONArray();
     JSONArray delete_row = new JSONArray();
     JSONArray table_columns = new JSONArray();
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
@@ -99,9 +99,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
          JSONArray temp = (JSONArray)obj;
          
-         JSONArray create_list = temp.get("create");
-         JSONArray create_list = temp.get("delete");
-         JSONArray create_list = temp.get("update");
+         create_list = temp.get("create");
+         create_list = temp.get("delete");
+         create_list = temp.get("update");
          
         
         //jsonObject=(org.json.simple.JSONObject)obj;       
