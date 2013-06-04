@@ -30,7 +30,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
   @Override
   public String getMethodName() {
-    return "Multi Operational";
+    return "crud_multi_object";
   }
   
   @Override
