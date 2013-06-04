@@ -72,6 +72,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONArray update_table_columns = new JSONArray();
     JSONObject updtae_list_inner;
     String update_primary_key;
+    String update_column_data_type;
+    String update_column_name;
     
     JSONArray delete_list = new JSONArray();
     JSONArray delete_row = new JSONArray();
@@ -159,7 +161,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 do_not_save=false;
                 // loop through each column within array == table column
                     try {
-                      create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
+                      create_table_columns = create_list.get(i).get(k);
                     } catch (JSONException e) {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
@@ -167,7 +169,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
                         try {
-                            create_table_contents = create_table_columns.getJSONArray(l);
+                            create_table_contents = create_table_columns.get(l);
                             table_column_data_type = String.valueOf(create_table_contents.get(0));
                             table_column_name = String.valueOf(create_table_contents.get(1));
                         } catch (JSONException e) {
@@ -287,12 +289,12 @@ public class MultiOperationalObject implements CustomCodeMethod {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
                     
-                    for (int l=0; l <= create_table_columns.length(); l++)
+                    for (int l=0; l <= update_table_columns.length(); l++)
                     {
                         try {
-                            create_table_contents = create_table_columns.get(l);
-                            table_column_data_type = String.valueOf(update_table_contents.get(0));
-                            table_column_name = String.valueOf(update_table_contents.get(1));
+                            update_table_contents = update_table_columns.get(l);
+                            update_column_data_type = String.valueOf(update_table_contents.get(0));
+                            update_column_name = String.valueOf(update_table_contents.get(1));
                         } catch (JSONException e) {
                           return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                         }
