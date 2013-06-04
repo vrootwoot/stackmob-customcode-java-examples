@@ -147,8 +147,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 }
             }
         }
-        }
     }
+    
 
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
