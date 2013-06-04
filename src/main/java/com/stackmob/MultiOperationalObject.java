@@ -102,7 +102,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
     {
         if (create_list.getJSONArray(i) instanceof JSONArray)
         {
-            create_tables = create_list.getJSONArray(i);
+            try {
+              create_tables = create_list.getJSONArray(i);
+            } catch (JSONException e) {
+              return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
+            }            
             // loop through each entry which needs creating
             for (int k=0; k <= create_tables.length(); k++)
             {
@@ -110,16 +114,21 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 if (create_list.getJSONArray(i).getJSONArray(k) instanceof JSONArray)
                 {
                     try {
-                    create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
+                      create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
                     } catch (JSONException e) {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
+                    
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
-                        create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
-                        table_column_data_type = String.valueOf(create_table_contents.get(0));
-                        table_column_name = String.valueOf(create_table_contents.get(1));
-
+                        try {
+                            create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
+                            table_column_data_type = String.valueOf(create_table_contents.get(0));
+                            table_column_name = String.valueOf(create_table_contents.get(1));
+                        } catch (JSONException e) {
+                          return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
+                        }
+                        
                         if (table_column_data_type.equals("list")) {
                          //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
                         } else if (table_column_data_type.equals("map")) {
@@ -132,9 +141,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
                         } else if (table_column_data_type.equals("long")) {
-                            feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
+                        //    feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                         } else if (table_column_data_type.equals("double")) {
-                            feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
+                        //    feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                         }
 
                      }
