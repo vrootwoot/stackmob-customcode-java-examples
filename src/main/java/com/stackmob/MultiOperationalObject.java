@@ -153,6 +153,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         catch (DatastoreException dse) {
                           return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
                         }                        
+                        catch (JSONException json) {
+                          return Util.internalErrorResponse("json_exception", json, errMap);  // http 500 - internal server error
+                        }                            
             }
         
     }
