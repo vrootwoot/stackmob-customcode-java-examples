@@ -109,7 +109,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 // loop through each column within array == table column
                 if (create_list.getJSONArray(i).getJSONArray(k) instanceof JSONArray)
                 {
+                    try {
                     create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
+                    } catch (JSONException e) {
+                      return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
+                    }
                     for (int l=0; l <= create_table_columns.length(); l++)
                     {
                         create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
