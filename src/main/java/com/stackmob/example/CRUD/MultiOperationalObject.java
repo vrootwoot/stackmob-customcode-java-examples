@@ -369,7 +369,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
             ds.deleteObject(delete_row.get(1).toString(), delete_row.get(0).toString()); // Finally the object gets deleted by ID.
         } catch (JSONException e) {
           return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-        }            
+        }
+        catch (InvalidSchemaException ise) {
+          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
+        }        
     }    
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
