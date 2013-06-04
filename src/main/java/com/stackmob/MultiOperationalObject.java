@@ -106,15 +106,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 if (create_table_contents.get(0) instanceof String )
                 {
                     if (create_table_contents.get(0).equals("list")) {
-                        feedback.put(create_table_contents.get(1), new SMList(create_table_contents.get(2)));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(create_table_contents.get(2)));
                     } else if (create_table_contents.get(0).equals("map")) {
-                        feedback.put(create_table_contents.get(1), new SMMap(create_table_contents.get(2)));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(create_table_contents.get(2)));
                     } else if (create_table_contents.get(0).equals("string")) {
-                        feedback.put(create_table_contents.get(1), new SMString(String.valueOf(create_table_contents.get(2))));    
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMString(String.valueOf(create_table_contents.get(2))));    
                     } else if (create_table_contents.get(0).equals("long")) {
-                        feedback.put(create_table_contents.get(1), new SMLong(Long.parseLong((create_table_contents.get(2)))));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMLong(Long.parseLong((create_table_contents.get(2)))));
                     } else if (create_table_contents.get(0).equals("double")) {
-                        feedback.put(create_table_contents.get(1), new SMDouble((create_table_contents.get(2))));
+                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMDouble((create_table_contents.get(2))));
                     }
                 }
              }
