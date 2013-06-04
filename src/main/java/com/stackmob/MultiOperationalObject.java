@@ -44,6 +44,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     JSONArray create_list;
     JSONArray create_table_contents;
+    JSONArray create_tables;
+    JSONArray create_table_columns;
     JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
@@ -100,13 +102,15 @@ public class MultiOperationalObject implements CustomCodeMethod {
     {
         if (create_list.getJSONArray(i) instanceof JSONArray)
         {
+            create_tables = create_list.getJSONArray(i);
             // loop through each entry which needs creating
-            for (int k=0; k <= create_list.getJSONArray(i).length(); k++)
+            for (int k=0; k <= create_tables.length(); k++)
             {
                 // loop through each column within array == table column
                 if (create_list.getJSONArray(i).getJSONArray(k) instanceof JSONArray)
                 {
-                    for (int l=0; l <= create_list.getJSONArray(i).getJSONArray(k).length(); l++)
+                    create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
+                    for (int l=0; l <= create_table_columns.length(); l++)
                     {
                         create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
                         table_column_data_type = String.valueOf(create_table_contents.get(0));
@@ -142,6 +146,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     }
                 }
             }
+        }
         }
     }
 
