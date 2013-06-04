@@ -36,7 +36,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public List<String> getParams() {
     // Please note that the strings `user` and `username` are unsuitable for parameter names
-    return Arrays.asList("create","update","delete");
+    return Arrays.asList("data");
   }
   /*
   private List<String> convertJsonToList(JSONObject j) {
