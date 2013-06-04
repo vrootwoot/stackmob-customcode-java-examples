@@ -40,7 +40,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   }
   
   private List<String> convertJsonToList(JSONObject j) {
-        JSONArray temp = j.getJSONArray();
+        JSONArray temp = j.getJSONArray(0);
         ArrayList<String> list = new ArrayList<String>();     
         if (temp != null) { 
            int len = temp.length();
@@ -158,7 +158,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             }
                         }  else if (table_column_data_type.equals("boolean")) {
                             try {
-                                feedback.put(table_column_name, new SMValue(String.valueOf(create_table_contents.get(2))));    
+                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2))));    
                             }
                             catch (JSONException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
