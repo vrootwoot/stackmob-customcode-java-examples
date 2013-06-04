@@ -47,6 +47,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
+    String table_column_name;
+    String table_column_data_type;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
     
@@ -102,26 +104,26 @@ public class MultiOperationalObject implements CustomCodeMethod {
             for (int l=0; l <= create_list.getJSONArray(i).getJSONArray(k).length(); l++)
             {
                 create_table_contents = create_list.getJSONArray(i).getJSONArray(k).getJSONArray(l);
-                
-                if (create_table_contents.get(0) instanceof String )
-                {
-                    if (create_table_contents.get(0).equals("list")) {
-                     //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
-                    } else if (create_table_contents.get(0).equals("map")) {
-                     //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(String.valueOf(create_table_contents.get(2))));
-                    } else if (create_table_contents.get(0).equals("string")) {
-                        try {
-                            feedback.put(String.valueOf(create_table_contents.get(1)), new SMString(String.valueOf(create_table_contents.get(2))));    
-                        }
-                        catch (JSONException e) {
-                            return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                        }
-                    } else if (create_table_contents.get(0).equals("long")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
-                    } else if (create_table_contents.get(0).equals("double")) {
-                        feedback.put(String.valueOf(create_table_contents.get(1)), new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
+                table_column_data_type = String.valueOf(create_table_contents.get(0));
+                table_column_name = String.valueOf(create_table_contents.get(1));
+
+                if (table_column_data_type.equals("list")) {
+                 //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMList(String.valueOf(create_table_contents.get(2))));
+                } else if (table_column_data_type.equals("map")) {
+                 //   feedback.put(String.valueOf(create_table_contents.get(1)), new SMMap(String.valueOf(create_table_contents.get(2))));
+                } else if (table_column_data_type.equals("string")) {
+                    try {
+                        feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
                     }
+                    catch (JSONException e) {
+                        return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                    }
+                } else if (table_column_data_type.equals("long")) {
+                    feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
+                } else if (table_column_data_type.equals("double")) {
+                    feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                 }
+
              }
             try {
               // Attempt to create object
