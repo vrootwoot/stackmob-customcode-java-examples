@@ -42,14 +42,14 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONArray create_list;
+    JSONArray create_list = new JSONArray();;
     JSONArray create_table_contents = new JSONArray();
-    JSONArray create_tables;
-    JSONArray create_table_columns;
+    JSONArray create_tables = new JSONArray();
+    JSONArray create_table_columns = new JSONArray();
     JSONObject create_list_inner;
     JSONObject update_list;
     JSONObject delete_list;
-    JSONArray table_columns;
+    JSONArray table_columns = new JSONArray();
     String table_column_name;
     String table_column_data_type;
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
