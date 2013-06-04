@@ -146,6 +146,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     // Creation 
     // loop through each table which needs entries creating
 
+    /*
     for (int i=0; i <= create_list.length(); i++)
     {
             try {
@@ -193,7 +194,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                              
             }
     }
-    
+    * 
+    */
     
 
     
