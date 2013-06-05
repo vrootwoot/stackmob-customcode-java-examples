@@ -123,7 +123,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     for (int i=0; i <= create_list.length; i++)
     {
             
-           create_tables = create_list[i];
+           create_tables = create_list.get(i).getAsJsonArray();
                        
             // loop through each entry which needs creating
             for (int k=0; k <= create_tables.length; k++)
@@ -133,7 +133,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 do_not_save=false;
                 // loop through each column within array == table column
                     
-                    create_table_columns = create_tables[k];
+                    create_table_columns = create_tables.get(k).getAsJsonArray();
                     
                     for (int l=0; l <= create_table_columns.length; l++)
                     {
