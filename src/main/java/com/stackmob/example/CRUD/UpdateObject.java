@@ -51,7 +51,8 @@ public class UpdateObject implements CustomCodeMethod {
 
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-   
+    Map<String, SMObject> feedback = new HashMap<String, SMObject>();
+    Map<String, String> errMap = new HashMap<String, String>();
     LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
     logger.debug(request.getBody());
     JSONParser parser = new JSONParser();
