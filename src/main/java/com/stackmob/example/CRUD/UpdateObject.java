@@ -46,62 +46,25 @@ public class UpdateObject implements CustomCodeMethod {
 
   @Override
   public List<String> getParams() {
-    return Arrays.asList("car_ID","year");
+    return Arrays.asList("data");
   }
 
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-    String carID = "";
-    String year  = "";
-
+   
     LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
     logger.debug(request.getBody());
-    Map<String, String> errMap = new HashMap<String, String>();
-
-    /* The following try/catch block shows how to properly fetch parameters for PUT/POST operations
-     * from the JSON request body
-     */
+        */
     JSONParser parser = new JSONParser();
     try {
       Object obj = parser.parse(request.getBody());
       JSONObject jsonObject = (JSONObject) obj;
 
-      // Fetch the values passed in by the user from the body of JSON
-      carID = (String) jsonObject.get("car_ID");
-      year = (String) jsonObject.get("year");
-
+     logger.debug(jsonObject);
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
-
-    if (Util.hasNulls(year, carID)){
-      return Util.badRequestResponse(errMap);
-    }
-
-    Map<String, SMValue> feedback = new HashMap<String, SMValue>();
-    feedback.put("updated year", new SMInt(Long.parseLong(year)));
-
-    DataService ds = serviceProvider.getDataService();
-    List<SMUpdate> update = new ArrayList<SMUpdate>();
-
-    /* Create the changes in the form of an Update that you'd like to apply to the object
-     * In this case I want to make changes to year by overriding existing values with user input
-     */
-    update.add(new SMSet("year", new SMInt(Long.parseLong(year))));
-
-    SMObject result;
-    try {
-      // Remember that the primary key in this car schema is `car_id`
-      result = ds.updateObject("car", new SMString(carID), update);
-      feedback.put("updated object", result);
-
-    } catch (InvalidSchemaException ise) {
-      return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
-    } catch (DatastoreException dse) {
-      return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-    }
-
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
   }
 
