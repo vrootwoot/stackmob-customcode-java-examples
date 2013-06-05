@@ -93,7 +93,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
       
-      JSONObject jsonObject = (JSONObject) parser.parse(request.getParams().get("object_operations"));  
+      org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) parser.parse(request.getParams().get("object_operations"));  
 
       
       // Fetch the values passed in by the user from the body of JSON
