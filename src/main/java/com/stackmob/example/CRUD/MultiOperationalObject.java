@@ -112,13 +112,13 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
 
 
-    for (int i=0; i <= create_list.length(); i++)
+    for (int i=0; i <= create_list.length; i++)
     {
             
            create_tables = gson.fromJson(create_list[i], String[].class);
                        
             // loop through each entry which needs creating
-            for (int k=0; k <= create_tables.length(); k++)
+            for (int k=0; k <= create_tables.length; k++)
             {
                 // empty feedback map as new table entry is being creared
                 creation.clear();
@@ -127,7 +127,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     
                     create_table_columns = gson.fromJson(create_tables[k], String[].class);         
                     
-                    for (int l=0; l <= create_table_columns.length(); l++)
+                    for (int l=0; l <= create_table_columns.length; l++)
                     {
                             
                         create_table_contents = gson.fromJson(create_table_columns[l], String[].class);         
