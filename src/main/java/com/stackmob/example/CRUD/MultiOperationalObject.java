@@ -40,18 +40,25 @@ import java.util.ArrayList;
 public class MultiOperationalObject implements CustomCodeMethod {
   
     static class TableFields {
-        private String data_type;
-        private String column_name;
-        private String data_value;
-        private String table_name;
+        public String data_type;
+        public String column_name;
+        public String data_value;
+        public String table_name;
     }
     
     static class TableEntry {
+        
        private TableFields[] table_fields;
        
        private TableEntry(TableFields[] table_fields) {
            this.table_fields = table_fields;
        }
+       
+        public TableFields[] getFields() {
+            return this.table_fields;
+        }  
+        
+        
     }
     
     static class TableOperation {
@@ -60,6 +67,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
         private TableOperation(TableEntry[] table_entry) {
             this.table_entry = table_entry;
         }
+        
+        public TableEntry[] getEntries() {
+            return this.table_entry;
+        }        
     }
     
    static class TableOperations {
@@ -70,6 +81,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
           this.operation = operation;
         }
         
+        public TableOperation getOperation(Integer op) {
+            return this.operation[op];
+        }
         
     }   
     
@@ -108,10 +122,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     //JSONObject create_list_inner;
     String table_column_name;
     String table_column_data_type;    
-    JsonArray create_table_contents = new JsonArray();
-    JsonArray create_table_columns;
-    JsonArray create_tables;
-    
+    String table_column_value;
     Boolean do_not_save = false;
     
     //JSONArray update_list = new JSONArray();
@@ -167,11 +178,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
     */
     
      TableOperations table_ops = gson.fromJson(request.getParams().get("object_operations"), TableOperations.class);
+     TableOperation create_list = table_ops.getOperation(0);
+     TableEntry[] table_entries = create_list.getEntries();
+          
      logger.debug("worked");
-    
-    
-    //JsonArray create_list = array.get(0);
-    
     
     
     logger.debug("grabbed json arrays, proceeding to operations");
@@ -180,101 +190,98 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
 
 
-    for (int i=0; i <= create_list.size(); i++)
+
+    // loop through each entry which needs creating
+    for (int k=0; k <= table_entries.length; k++)
     {
-            
-           create_tables = create_list.get(i).getAsJsonArray();
-                       
-            // loop through each entry which needs creating
-            for (int k=0; k <= create_tables.size(); k++)
+        // empty feedback map as new table entry is being creared
+        creation.clear();
+        do_not_save=false;
+        // loop through each column within array == table column
+
+            TableFields[] create_table_columns = table_entries[k].getFields();
+
+            for (int l=0; l <= create_table_columns.length; l++)
             {
-                // empty feedback map as new table entry is being creared
-                creation.clear();
-                do_not_save=false;
-                // loop through each column within array == table column
-                    
-                    create_table_columns = create_tables.get(k).getAsJsonArray();
-                    
-                    for (int l=0; l <= create_table_columns.size(); l++)
-                    {
-                            
-                        create_table_contents = create_table_columns.get(1).getAsJsonArray();
-                        table_column_data_type = create_table_contents.get(2).getAsJsonArray().toString();
-                        table_column_name = create_table_contents.get(1).getAsJsonArray().toString();
-                        
-                        
-                        if (table_column_data_type.equals("map")) {
-                            /*
-                            try {
-                               feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }  
-                            */
-                            
-                        } else if (table_column_data_type.equals("string")) {
-                            
-                                feedback.put(table_column_name, new SMString(create_table_contents.get(2).toString()));    
-                                creation.put(table_column_name, new SMString(create_table_contents.get(2).toString()));    
-                            
-                        }  else if (table_column_data_type.equals("boolean")) {
-                            
-                           //     feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
-                          //      creation.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
-                            
-                        }
-                        else if (table_column_data_type.equals("integer")) {
-                            
-                             //   feedback.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
-                             //   creation.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
-                            
-                            
-                        }   
-                        /*
-                        else if (table_column_data_type.equals("list")) {
-                            try {
-                                feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }
-                        } 
-                        */ 
-                        
-                       else if (table_column_data_type.equals("long")) {
-                            
-                              //  feedback.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
-                             //   creation.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
-                            
-                                                        
-                        } else if (table_column_data_type.equals("double")) {
-                            
-                              //  feedback.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
-                              //  creation.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
-                                                                
-                        } else {
-                            feedback.put("invalid data type", new SMString(table_column_name) );
-                            do_not_save = true;
-                            break;
-                        }
-                     }
-                    
-                        try {
-                          // Attempt to create object
-                            if (!do_not_save && create_table_contents.get(3)!=null) {
-                                result = ds.createObject(create_table_contents.get(3).toString(), new SMObject(creation));
-                                feedback.put("created object",result);
-                            }
-                        }
-                        catch (InvalidSchemaException ise) {
-                          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
-                        }
-                        catch (DatastoreException dse) {
-                          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-                        }                                                    
-            }
-    }    
+
+                
+                table_column_data_type = create_table_columns[l].data_type;
+                table_column_name = create_table_columns[l].column_name;
+                table_column_value = create_table_columns[l].data_value;
+
+
+                if (table_column_data_type.equals("map")) {
+                    /*
+                    try {
+                       feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
+                    }
+                    catch (JSONException e) {
+                        return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                    }  
+                    */
+
+                } else if (table_column_data_type.equals("string")) {
+
+                        feedback.put(table_column_name, new SMString(table_column_value));    
+                        creation.put(table_column_name, new SMString(table_column_value));    
+
+                }  else if (table_column_data_type.equals("boolean")) {
+
+                   //     feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
+                  //      creation.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
+
+                }
+                else if (table_column_data_type.equals("integer")) {
+
+                     //   feedback.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
+                     //   creation.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
+
+
+                }   
+                /*
+                else if (table_column_data_type.equals("list")) {
+                    try {
+                        feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
+                    }
+                    catch (JSONException e) {
+                        return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                    }
+                } 
+                */ 
+
+               else if (table_column_data_type.equals("long")) {
+
+                      //  feedback.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
+                     //   creation.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
+
+
+                } else if (table_column_data_type.equals("double")) {
+
+                      //  feedback.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
+                      //  creation.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
+
+                } else {
+                    feedback.put("invalid data type", new SMString(table_column_name) );
+                    do_not_save = true;
+                    break;
+                }
+             }
+
+                try {
+                  // Attempt to create object
+                    if (!do_not_save) {
+                        result = ds.createObject("users", new SMObject(creation));
+                        feedback.put("created object",result);
+                    }
+                }
+                catch (InvalidSchemaException ise) {
+                  return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
+                }
+                catch (DatastoreException dse) {
+                  return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
+                }                                                    
+    }
+        
     
 }
     catch (JsonParseException mate) {
