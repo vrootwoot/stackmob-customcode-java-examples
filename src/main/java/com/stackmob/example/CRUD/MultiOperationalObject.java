@@ -117,7 +117,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     arrayzz[0]="dsgdsg";
     arrayzz[1]="dsgdsgdssss";
     arrayzz[2]="dsgdsgds";
-    String jsont = "{\"create\":[[[\"string\",\"city\",\"London\",\"user\"],[\"boolean\",\"gender\",1,\"user\"],[\"integer\",\"birthmonth\",11,\"user\"]],[[\"string\",\"city\",\"Stockholm\",\"user\"],[\"boolean\",\"gender\",0,\"user\"],[\"integer\",\"birthmonth\",8,\"user\"]],[[\"string\",\"city\",\"Amsterdam\",\"user\"],[\"boolean\",\"gender\",0,\"user\"],[\"integer\",\"birthmonth\",10,\"user\"]]]}";
+    String jsont = "[\"dgdfg\",\"dgdfgdfg\",\"dfgdfgdfgdf\"]";
         
       logger.debug("hello1");
       JsonElement array9 =  parser.parse(jsont);    
