@@ -10,11 +10,13 @@ import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
+import com.google.gson.*;
+
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
+//import org.json.simple.JSONObject;
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONValue;
 
 //import org.json.parser.*;
 //import org.json.*;
@@ -103,20 +105,20 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //org.json.JSONObject jsonObject = (org.json.JSONObject) JSONSerializer.toJSON(request.getParams().get("object_operations"));          
         
       
-      
+      /*
     Object obj = parser.parse(request.getParams().get("object_operations"));
     org.json.simple.JSONObject jsonjObject = (org.json.simple.JSONObject) obj;
     org.json.simple.JSONArray array_mate=(org.json.simple.JSONArray)jsonjObject;
-    
+    */
   
       
       // Fetch the values passed in by the user from the body of JSON
-      
+      /*
       logger.debug("trying to grab json arrays");
       create_list = (JSONArray)array_mate.get(0);
       delete_list = (JSONArray)array_mate.get(1);
       update_list = (JSONArray)array_mate.get(2);
-        
+        */
     
     
     
