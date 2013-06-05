@@ -94,9 +94,24 @@ public class MultiOperationalObject implements CustomCodeMethod {
     /* The following try/catch block shows how to properly fetch parameters for PUT/POST operations
      * from the JSON request body
      */
-    JSONParser parser = new JSONParser();
     
-        
+ Gson gson = new GsonBuilder()
+     .registerTypeAdapter(Id.class, new IdTypeAdapter())
+     .enableComplexMapKeySerialization()
+     .serializeNulls()
+     .setDateFormat(DateFormat.LONG)
+     .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+     .setPrettyPrinting()
+     .setVersion(1.0)
+     .create();    
+    
+    JsonParser parser = new JsonParser();
+    JsonElement jj = parser.parse(request.getParams().get("object_operations"));
+
+      create_list = (JSONArray)jj.get(0);
+      delete_list = (JSONArray)jj.get(1);
+      update_list = (JSONArray)jj.get(2);    
+    
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
       
