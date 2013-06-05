@@ -108,10 +108,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
     Gson gson = new Gson();  
     JsonParser parser = new JsonParser();
-    //JsonArray array = parser.parse(request.getParams().get("object_operations")).getAsJsonArray();    
     
     try {
-        parser.parse(request.getParams().get("object_operations"));    
+      JsonArray array =  parser.parse(request.getParams().get("object_operations"));    
     }
     catch (JsonParseException mate) {
         return Util.internalErrorResponse("json_parse_exception", mate, errMap);  // http 500 - internal server error        
