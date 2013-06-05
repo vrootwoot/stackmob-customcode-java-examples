@@ -70,10 +70,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
           this.operation = operation;
         }
         
-        @Override
-        public String toString() {
-          return String.format("(name=%s, source=%s)", name, source);
-        }
+        
     }   
     
 
