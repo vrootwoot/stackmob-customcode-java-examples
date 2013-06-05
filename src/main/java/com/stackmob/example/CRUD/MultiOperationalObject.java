@@ -110,7 +110,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JsonParser parser = new JsonParser();
     
     try {
+        logger.debug("hello1");
       JsonElement array9 =  parser.parse(request.getParams().get("object_operations"));    
+      logger.debug("hello2");
       JsonArray array = array9.getAsJsonArray();
       JsonArray create_list = array.get(0).getAsJsonArray();
     
