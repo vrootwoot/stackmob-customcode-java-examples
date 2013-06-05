@@ -139,8 +139,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
                     {
                             
                         create_table_contents = create_table_columns.get(1).getAsJsonArray();
-                        table_column_data_type = create_table_contents.get(2).getAsJsonArray();
-                        table_column_name = create_table_contents.get(1).getAsJsonArray();
+                        table_column_data_type = create_table_contents.get(2).getAsJsonArray().toString();
+                        table_column_name = create_table_contents.get(1).getAsJsonArray().toString();
                         
                         
                         if (table_column_data_type.equals("map")) {
@@ -156,7 +156,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         } else if (table_column_data_type.equals("string")) {
                             
                                 feedback.put(table_column_name, new SMString(create_table_contents.get(2).toString()));    
-                                creation.put(table_column_name, new SMString(create_table_contents.get(2).tooString()));    
+                                creation.put(table_column_name, new SMString(create_table_contents.get(2).toString()));    
                             
                         }  else if (table_column_data_type.equals("boolean")) {
                             
