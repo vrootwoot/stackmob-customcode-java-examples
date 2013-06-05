@@ -27,6 +27,9 @@ import java.util.*;
 import java.util.List;
 import java.util.Map;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * This example will show a user how to write a custom code method
  * with two parameters that updates the specified object in their schema
@@ -110,8 +113,14 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JsonParser parser = new JsonParser();
     
     try {
-        logger.debug("hello1");
-      JsonElement array9 =  parser.parse(request.getParams().get("object_operations"));    
+        
+   Collection collection = new ArrayList();
+    collection.add("hello");
+    collection.add(5);
+    String jsont = gson.toJson(collection);        
+        
+      logger.debug("hello1");
+      JsonElement array9 =  parser.parse(jsont);    
       logger.debug("hello2");
       JsonArray array = array9.getAsJsonArray();
       logger.debug("hello3");
