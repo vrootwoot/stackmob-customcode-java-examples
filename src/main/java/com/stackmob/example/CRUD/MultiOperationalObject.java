@@ -48,9 +48,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
     static class TableEntry {
         
-       private TableFields[] table_fields;
+       public TableFields[] table_fields;
        
-       private TableEntry(TableFields[] table_fields) {
+       public TableEntry(TableFields[] table_fields) {
            this.table_fields = table_fields;
        }
        
@@ -62,9 +62,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     }
     
     static class TableOperation {
-        private TableEntry[] table_entry;
+        public TableEntry[] table_entry;
         
-        private TableOperation(TableEntry[] table_entry) {
+        public TableOperation(TableEntry[] table_entry) {
             this.table_entry = table_entry;
         }
         
@@ -75,9 +75,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
    static class TableOperations {
        
-        private TableOperation[] operation;
+        public TableOperation[] operation;
 
-        private TableOperations(TableOperation[] operation) {
+        public TableOperations(TableOperation[] operation) {
           this.operation = operation;
         }
         
