@@ -10,13 +10,13 @@ import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
 
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
-
-import org.json.parser.*;
-import org.json.*;
+//import org.json.parser.*;
+//import org.json.*;
  
 
 import java.net.HttpURLConnection;
@@ -97,15 +97,21 @@ public class MultiOperationalObject implements CustomCodeMethod {
       
       //org.json.JSONObject jsonObject = (org.json.JSONObject) parser.parse(request.getParams().get("object_operations"));  
         
-      org.json.JSONObject jsonObject = (org.json.JSONObject) JSONSerializer.toJSON(request.getParams().get("object_operations"));          
+      //org.json.JSONObject jsonObject = (org.json.JSONObject) JSONSerializer.toJSON(request.getParams().get("object_operations"));          
         
+      
+      
+    Object obj=JSONValue.parse(request.getParams().get("object_operations"));
+    JSONArray array_mate=(JSONArray)obj;
+
+  
       
       // Fetch the values passed in by the user from the body of JSON
       
       logger.debug("trying to grab json arrays");
-      create_list = jsonObject.getJSONArray("create");
-      delete_list = jsonObject.getJSONArray("delete");
-      update_list = jsonObject.getJSONArray("update");
+      create_list = (JSONArray)array_mate.get("create");
+      delete_list = (JSONArray)array_mate.get("delete");
+      update_list = (JSONArray)array_mate.get("update");
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
