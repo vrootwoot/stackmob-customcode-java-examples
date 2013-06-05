@@ -71,16 +71,16 @@ public class MultiOperationalObject implements CustomCodeMethod {
     String table_column_data_type;    
     Boolean do_not_save = false;
     
-    JSONArray update_list = new JSONArray();
-    JSONArray update_table_contents = new JSONArray();
-    JSONArray update_tables = new JSONArray();
-    JSONArray update_table_columns = new JSONArray();
+    //JSONArray update_list = new JSONArray();
+    //JSONArray update_table_contents = new JSONArray();
+    //JSONArray update_tables = new JSONArray();
+    //JSONArray update_table_columns = new JSONArray();
     //JSONObject updtae_list_inner;
     String update_primary_key;
     
-    JSONArray delete_list = new JSONArray();
-    JSONArray delete_row = new JSONArray();
-    JSONArray table_columns = new JSONArray();
+    //JSONArray delete_list = new JSONArray();
+    //JSONArray delete_row = new JSONArray();
+    //JSONArray table_columns = new JSONArray();
     Map<String, SMValue> feedback = new HashMap<String, SMValue>();
     Map<String, SMValue> creation = new HashMap<String, SMValue>();
     Map<String, String> errMap = new HashMap<String, String>();
