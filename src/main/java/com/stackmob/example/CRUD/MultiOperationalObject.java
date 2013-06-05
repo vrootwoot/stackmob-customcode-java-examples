@@ -69,6 +69,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
     //JSONObject create_list_inner;
     String table_column_name;
     String table_column_data_type;    
+    String[] create_table_contents;
+    String[] create_table_columns;
+    String[] create_tables;
+    
     Boolean do_not_save = false;
     
     //JSONArray update_list = new JSONArray();
@@ -97,32 +101,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
     Gson gson = new Gson();  
     String[] test = gson.fromJson(request.getParams().get("object_operations"), String[].class);
-    
-    
-      //Object obj = parser.parse(request.getParams().get("object_operations"));
-      //JSONObject jsonObject = (JSONObject) obj;
-      
-      //org.json.JSONObject jsonObject = (org.json.JSONObject) parser.parse(request.getParams().get("object_operations"));  
-        
-      //org.json.JSONObject jsonObject = (org.json.JSONObject) JSONSerializer.toJSON(request.getParams().get("object_operations"));          
-        
-      
-      /*
-    Object obj = parser.parse(request.getParams().get("object_operations"));
-    org.json.simple.JSONObject jsonjObject = (org.json.simple.JSONObject) obj;
-    org.json.simple.JSONArray array_mate=(org.json.simple.JSONArray)jsonjObject;
-    */
-  
-      
-      // Fetch the values passed in by the user from the body of JSON
-      /*
-      logger.debug("trying to grab json arrays");
-      create_list = (JSONArray)array_mate.get(0);
-      delete_list = (JSONArray)array_mate.get(1);
-      update_list = (JSONArray)array_mate.get(2);
-        */
-    
-    
+    String[] create_list = gson.fromJson(test[0], String[].class);
+    String[] update_list = gson.fromJson(test[1], String[].class);
+    String[] delete_list = gson.fromJson(test[2], String[].class);
     
     
     logger.debug("grabbed json arrays, proceeding to operations");
@@ -130,7 +111,102 @@ public class MultiOperationalObject implements CustomCodeMethod {
     DataService ds = serviceProvider.getDataService();
     
 
-    
+
+    for (int i=0; i <= create_list.size(); i++)
+    {
+            
+           create_tables = gson.fromJson(create_list[i], String[].class);
+                       
+            // loop through each entry which needs creating
+            for (int k=0; k <= create_tables.size(); k++)
+            {
+                // empty feedback map as new table entry is being creared
+                creation.clear();
+                do_not_save=false;
+                // loop through each column within array == table column
+                    
+                    create_table_columns = gson.fromJson(create_tables[k], String[].class);         
+                    
+                    for (int l=0; l <= create_table_columns.size(); l++)
+                    {
+                            
+                        create_table_contents = gson.fromJson(create_table_columns[l], String[].class);         
+                        table_column_data_type = create_table_contents[0];
+                        table_column_name = create_table_contents[1];
+                        
+                        
+                        if (table_column_data_type.equals("map")) {
+                            /*
+                            try {
+                               feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }  
+                            */
+                            
+                        } else if (table_column_data_type.equals("string")) {
+                            
+                                feedback.put(table_column_name, new SMString(create_table_contents[2]));    
+                                creation.put(table_column_name, new SMString(create_table_contents[2]));    
+                            
+                        }  else if (table_column_data_type.equals("boolean")) {
+                            
+                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
+                                creation.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents[2])));    
+                            
+                        }
+                        else if (table_column_data_type.equals("integer")) {
+                            
+                                feedback.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
+                                creation.put(table_column_name, new SMInt(Long.parseLong(create_table_contents[2])));    
+                            
+                            
+                        }   
+                        /*
+                        else if (table_column_data_type.equals("list")) {
+                            try {
+                                feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
+                            }
+                            catch (JSONException e) {
+                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
+                            }
+                        } 
+                        */ 
+                        
+                       else if (table_column_data_type.equals("long")) {
+                            
+                                feedback.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
+                                creation.put(table_column_name, new SMLong(Long.parseLong(create_table_contents[2])));
+                            
+                                                        
+                        } else if (table_column_data_type.equals("double")) {
+                            
+                                feedback.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
+                                creation.put(table_column_name, new SMDouble(Double.parseDouble(create_table_contents[2])));
+                                                                
+                        } else {
+                            feedback.put("invalid data type", new SMString(table_column_name) );
+                            do_not_save = true;
+                            break;
+                        }
+                     }
+                    
+                        try {
+                          // Attempt to create object
+                            if (!do_not_save && create_table_contents[3]!=null) {
+                                result = ds.createObject(create_table_contents[3], new SMObject(creation));
+                                feedback.put("created object",result);
+                            }
+                        }
+                        catch (InvalidSchemaException ise) {
+                          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
+                        }
+                        catch (DatastoreException dse) {
+                          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
+                        }                                                    
+            }
+    }    
     
 
     
