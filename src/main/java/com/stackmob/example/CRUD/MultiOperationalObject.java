@@ -9,8 +9,12 @@ import com.stackmob.core.rest.ResponseToProcess;
 import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
+
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
+
+
 import org.json.parser.JSONParser;
 import org.json.parser.JSONException;
 import org.json.JSONArray;
@@ -94,8 +98,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
       
-      org.json.JSONObject jsonObject = (org.json.JSONObject) parser.parse(request.getParams().get("object_operations"));  
-
+      //org.json.JSONObject jsonObject = (org.json.JSONObject) parser.parse(request.getParams().get("object_operations"));  
+        
+      org.json.JSONObject jsonObject = (org.json.JSONObject) JSONSerializer.toJSON(request.getParams().get("object_operations"));          
+        
       
       // Fetch the values passed in by the user from the body of JSON
       
