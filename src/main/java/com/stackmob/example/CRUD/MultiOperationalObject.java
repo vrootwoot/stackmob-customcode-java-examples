@@ -66,7 +66,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONArray create_table_contents = new JSONArray();
     JSONArray create_tables = new JSONArray();
     JSONArray create_table_columns = new JSONArray();
-    JSONObject create_list_inner;
+    //JSONObject create_list_inner;
     String table_column_name;
     String table_column_data_type;    
     Boolean do_not_save = false;
@@ -75,7 +75,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JSONArray update_table_contents = new JSONArray();
     JSONArray update_tables = new JSONArray();
     JSONArray update_table_columns = new JSONArray();
-    JSONObject updtae_list_inner;
+    //JSONObject updtae_list_inner;
     String update_primary_key;
     
     JSONArray delete_list = new JSONArray();
