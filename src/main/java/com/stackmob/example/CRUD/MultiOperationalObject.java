@@ -35,7 +35,47 @@ import java.util.ArrayList;
  * when given a unique ID and a `year` field on which to update.
  */
 
+
+
 public class MultiOperationalObject implements CustomCodeMethod {
+  
+    static class TableFields {
+        private String data_type;
+        private String column_name;
+        private String data_value;
+        private String table_name;
+    }
+    
+    static class TableEntry {
+       private TableFields[] table_fields;
+       
+       private TableEntry(TableFields[] table_fields) {
+           this.table_fields = table_fields;
+       }
+    }
+    
+    static class TableOperation {
+        private TableEntry[] table_entry;
+        
+        private TableOperation(TableEntry[] table_entry) {
+            this.table_entry = table_entry;
+        }
+    }
+    
+   static class TableOperations {
+       
+        private TableOperation[] operation;
+
+        private TableOperations(TableOperation[] operation) {
+          this.operation = operation;
+        }
+        
+        @Override
+        public String toString() {
+          return String.format("(name=%s, source=%s)", name, source);
+        }
+    }   
+    
 
   @Override
   public String getMethodName() {
@@ -112,7 +152,8 @@ public class MultiOperationalObject implements CustomCodeMethod {
     JsonParser parser = new JsonParser();
     
     try {
-        
+     
+        /*
     String[] arrayzz = new String[10];
     arrayzz[0]="dsgdsg";
     arrayzz[1]="dsgdsgdssss";
@@ -126,10 +167,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
       logger.debug("hello3");
       JsonArray create_list = array.get(0).getAsJsonArray();
       logger.debug("hello4");
+    */
     
-    
-    
-    logger.debug("hello");
+     TableOperations table_ops = gson.fromJson(request.getParams().get("object_operations"), TableOperations.class);
+     logger.debug("worked");
     
     
     //JsonArray create_list = array.get(0);
