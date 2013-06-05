@@ -109,9 +109,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
       // Fetch the values passed in by the user from the body of JSON
       
       logger.debug("trying to grab json arrays");
-      create_list = (JSONArray)array_mate.get("create");
-      delete_list = (JSONArray)array_mate.get("delete");
-      update_list = (JSONArray)array_mate.get("update");
+      create_list = (JSONArray)array_mate.get(0);
+      delete_list = (JSONArray)array_mate.get(1);
+      update_list = (JSONArray)array_mate.get(2);
         
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
