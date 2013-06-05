@@ -50,10 +50,8 @@ public class GlobalOperations implements CustomCodeMethod {
   
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-      logger = serviceProvider.getLoggerService(GlobalOperations.class);
-
-  logger.debug("log anything");
-    return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
+    
+    return new ResponseToProcess(HttpURLConnection.HTTP_OK, request.getParams().get("object_operations"));
 
   }
 
