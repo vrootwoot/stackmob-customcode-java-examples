@@ -220,13 +220,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }                            
                         } else if (table_column_data_type.equals("double")) {
-                            try {
+                            
                                 feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                                 creation.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
-                            }
-                            catch (ParseException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }                                                        
+                                                                
                         } else {
                             feedback.put("invalid data type", new SMString(table_column_name) );
                             do_not_save = true;
@@ -246,10 +243,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         }
                         catch (DatastoreException dse) {
                           return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-                        }                        
-                        catch (ParseException json) {
-                          return Util.internalErrorResponse("json_exception", json, errMap);  // http 500 - internal server error
-                        }                            
+                        }                                                    
             }
     }
     
