@@ -57,7 +57,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
 
-    JSONArray create_list = new JSONArray();;
+    JSONArray create_list = new JSONArray();
     JSONArray create_table_contents = new JSONArray();
     JSONArray create_tables = new JSONArray();
     JSONArray create_table_columns = new JSONArray();
@@ -132,9 +132,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
     }
     
     
-    if ((create_list.length()==0) && (update_list.length()==0) && (delete_list.length()==0)){
-      return Util.badRequestResponse(errMap);
-    }
+    //if ((create_list.length()==0) && (update_list.length()==0) && (delete_list.length()==0)){
+    //  return Util.badRequestResponse(errMap);
+   // }
     
     logger.debug("grabbed json arrays, proceeding to operations");
 
