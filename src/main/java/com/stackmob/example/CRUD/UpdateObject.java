@@ -58,8 +58,6 @@ public class UpdateObject implements CustomCodeMethod {
     try {
       Object obj = parser.parse(request.getBody());
       JSONObject jsonObject = (JSONObject) obj;
-
-     logger.debug(obj);
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
