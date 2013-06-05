@@ -136,30 +136,30 @@ public class MultiOperationalObject implements CustomCodeMethod {
     // Creation 
     // loop through each table which needs entries creating
 
-    for (int i=0; i <= create_list.length(); i++)
+    for (int i=0; i <= create_list.size(); i++)
     {
             try {
-              create_tables = create_list.getJSONArray(i);
+              create_tables = (JSONArray)create_list.get(i);
             } catch (JSONException e) {
               return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
             }            
             // loop through each entry which needs creating
-            for (int k=0; k <= create_tables.length(); k++)
+            for (int k=0; k <= create_tables.size(); k++)
             {
                 // empty feedback map as new table entry is being creared
                 creation.clear();
                 do_not_save=false;
                 // loop through each column within array == table column
                     try {
-                      create_table_columns = create_list.getJSONArray(i).getJSONArray(k);
+                      create_table_columns = (JSONArray)create_list.get(i).get(k);
                     } catch (JSONException e) {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
                     
-                    for (int l=0; l <= create_table_columns.length(); l++)
+                    for (int l=0; l <= create_table_columns.size(); l++)
                     {
                         try {
-                            create_table_contents = create_table_columns.getJSONArray(l);
+                            create_table_contents = (JSONArray)create_table_columns.get(l);
                             table_column_data_type = String.valueOf(create_table_contents.get(0));
                             table_column_name = String.valueOf(create_table_contents.get(1));
                         } catch (JSONException e) {
@@ -256,141 +256,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
     }
     
 
-    // Update
-    // loop through each table which needs updating
-
-    for (int i=0; i <= update_list.length(); i++)
-    {
-            try {
-              update_tables = update_list.getJSONArray(i);
-            } catch (JSONException e) {
-              return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-            }            
-            // loop through each entry which needs updating
-            for (int k=1; k <= update_tables.length(); k++)
-            {
-                // empty feedback map as new table entry is being updated
-                update.clear();
-                // loop through each column within array == table column
-                    try {
-                      update_primary_key = update_list.getJSONArray(i).getJSONArray(0).toString();
-                      update_table_columns = update_list.getJSONArray(i).getJSONArray(k);
-                    } catch (JSONException e) {
-                      return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-                    }
-                    
-                    for (int l=0; l <= create_table_columns.length(); l++)
-                    {
-                        try {
-                            create_table_contents = create_table_columns.getJSONArray(l);
-                            table_column_data_type = String.valueOf(update_table_contents.get(0));
-                            table_column_name = String.valueOf(update_table_contents.get(1));
-                        } catch (JSONException e) {
-                          return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-                        }
-                        
-                        if (table_column_data_type.equals("map")) {
-                            /*
-                            try {
-                               feedback.put(table_column_name, new SMMap(String.valueOf(create_table_contents.get(2))));
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }  
-                            */
-                            
-                        } else if (table_column_data_type.equals("string")) {
-                            try {
-                                feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));
-                                update.add(new SMSet(table_column_name, new SMString(String.valueOf(create_table_contents.get(2)) )));
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }
-                        }  else if (table_column_data_type.equals("boolean")) {
-                            try {
-                                feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())) );
-                                update.add(new SMSet(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())) ));    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }
-                        }
-                        else if (table_column_data_type.equals("integer")) {
-                            try {
-                                feedback.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))) );                                
-                                update.add(new SMSet(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))) ));                                    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }
-                        }   
-                        /*
-                        else if (table_column_data_type.equals("list")) {
-                            try {
-                                feedback.put(table_column_name, new SMList(convertJsonToList(create_table_contents.get(2))));    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }
-                        } 
-                        */ 
-                        
-                       else if (table_column_data_type.equals("long")) {
-                            try {
-                                feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))) );                                                                
-                                update.add(new SMSet(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))) ));                                                                    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }                            
-                        } else if (table_column_data_type.equals("double")) {
-                            try {
-                                feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))) );
-                                update.add(new SMSet(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))) ));                                                                    
-                            }
-                            catch (JSONException e) {
-                                return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
-                            }                                                        
-                        }
-
-                     }
-                        try {
-                          // Attempt to update object
-                            result = ds.updateObject(String.valueOf(create_table_contents.get(3)), new SMString(update_primary_key), update);
-                            feedback.put("updated object", result);
-                        }
-                        catch (InvalidSchemaException ise) {
-                          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
-                        }
-                        catch (DatastoreException dse) {
-                          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-                        }                        
-                        catch (JSONException json) {
-                          return Util.internalErrorResponse("json_exception", json, errMap);  // http 500 - internal server error
-                        }                            
-            }
-    }
-    
-
-    // Delete
-    // loop through each row which needs deleting
-
-    for (int i=0; i <= delete_list.length(); i++)
-    {
-        try {
-            delete_row = delete_list.getJSONArray(i);
-            ds.deleteObject(delete_row.get(1).toString(), delete_row.get(0).toString()); // Finally the object gets deleted by ID.
-        } catch (JSONException e) {
-          return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-        }
-        catch (InvalidSchemaException ise) {
-          return Util.internalErrorResponse("invalid_schema", ise, errMap);  // http 500 - internal server error
-        }        
-        catch (DatastoreException dse) {
-          return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
-        }        
-    }    
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
