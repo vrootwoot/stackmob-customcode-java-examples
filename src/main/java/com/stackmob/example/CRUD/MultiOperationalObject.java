@@ -119,7 +119,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     }
     
     
-    if ((create_list.length()==0) && (update_list.length()==0) && (delete_list.length()==0)){
+    if ((create_list.size()==0) && (update_list.size()==0) && (delete_list.size()==0)){
       return Util.badRequestResponse(errMap);
     }
     
