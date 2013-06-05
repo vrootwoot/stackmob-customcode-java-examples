@@ -113,10 +113,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       JsonElement array9 =  parser.parse(request.getParams().get("object_operations"));    
       JsonArray array = array9.getAsJsonArray();
       JsonArray create_list = array.get(0).getAsJsonArray();
-    }
-    catch (JsonParseException mate) {
-        return Util.internalErrorResponse("json_parse_exception", mate, errMap);  // http 500 - internal server error        
-    }
+    
     
     
     logger.debug("hello");
@@ -228,7 +225,10 @@ public class MultiOperationalObject implements CustomCodeMethod {
             }
     }    
     
-
+}
+    catch (JsonParseException mate) {
+        return Util.internalErrorResponse("json_parse_exception", mate, errMap);  // http 500 - internal server error        
+    }
     
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
