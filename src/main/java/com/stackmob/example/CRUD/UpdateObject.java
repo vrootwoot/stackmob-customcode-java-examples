@@ -24,9 +24,7 @@ import com.stackmob.core.rest.ResponseToProcess;
 import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
 
 import java.net.HttpURLConnection;
 import java.util.*;
@@ -57,13 +55,13 @@ public class UpdateObject implements CustomCodeMethod {
     logger.debug(request.getBody());
     JSONParser parser = new JSONParser();
     try {
-      Object obj = parser.parse(request.getBody());
-      JSONObject jsonObject = (JSONObject) obj;
+		JsonElement root = new JsonParser().parse(request.getBody());
+      	String value1 = root.getAsJsonObject().get("data").getAsJsonObject().get("field1").getAsString();
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
-    return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
+    return new ResponseToProcess(HttpURLConnection.HTTP_OK, value1);
   }
 
 }
