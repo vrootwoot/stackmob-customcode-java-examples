@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
 
 //import org.json.parser.*;
 //import org.json.*;
@@ -101,7 +102,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
       
       
-    Object obj=JSONValue.parse(request.getParams().get("object_operations"));
+    Object obj = JSONValue.parse(request.getParams().get("object_operations"));
     JSONArray array_mate=(JSONArray)obj;
 
   
