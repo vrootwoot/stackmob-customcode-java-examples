@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * This example will show a user how to write a custom code method
@@ -114,10 +113,11 @@ public class MultiOperationalObject implements CustomCodeMethod {
     
     try {
         
-   Collection collection = new ArrayList();
-    collection.add("hello");
-    collection.add(5);
-    String jsont = gson.toJson(collection);        
+    String[] arrayzz = new String[10];
+    arrayzz[0]="dsgdsg";
+    arrayzz[1]="dsgdsgdssss";
+    arrayzz[2]="dsgdsgds";
+    String jsont = gson.toJson(arrayzz);        
         
       logger.debug("hello1");
       JsonElement array9 =  parser.parse(jsont);    
