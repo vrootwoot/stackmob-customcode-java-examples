@@ -54,7 +54,6 @@ public class UpdateObject implements CustomCodeMethod {
    
     LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
     logger.debug(request.getBody());
-        */
     JSONParser parser = new JSONParser();
     try {
       Object obj = parser.parse(request.getBody());
