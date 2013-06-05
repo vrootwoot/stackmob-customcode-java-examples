@@ -116,9 +116,6 @@ public class MultiOperationalObject implements CustomCodeMethod {
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
-    } catch (JSONException pe) {
-      logger.error(pe.getMessage(), pe);
-      return Util.badRequestResponse(errMap, pe.getMessage());
     }
     
     
@@ -140,7 +137,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     {
             try {
               create_tables = (JSONArray)create_list.get(i);
-            } catch (JSONException e) {
+            } catch (ParseException e) {
               return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
             }            
             // loop through each entry which needs creating
@@ -152,7 +149,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                 // loop through each column within array == table column
                     try {
                       create_table_columns = (JSONArray)create_list.get(i).get(k);
-                    } catch (JSONException e) {
+                    } catch (ParseException e) {
                       return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                     }
                     
@@ -162,7 +159,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                             create_table_contents = (JSONArray)create_table_columns.get(l);
                             table_column_data_type = String.valueOf(create_table_contents.get(0));
                             table_column_name = String.valueOf(create_table_contents.get(1));
-                        } catch (JSONException e) {
+                        } catch (ParseException e) {
                           return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
                         }
                         
@@ -181,7 +178,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 feedback.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
                                 creation.put(table_column_name, new SMString(String.valueOf(create_table_contents.get(2))));    
                             }
-                            catch (JSONException e) {
+                            catch (ParseException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
                         }  else if (table_column_data_type.equals("boolean")) {
@@ -189,7 +186,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 feedback.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())));    
                                 creation.put(table_column_name, new SMBoolean(Boolean.valueOf(create_table_contents.get(2).toString())));    
                             }
-                            catch (JSONException e) {
+                            catch (ParseException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
                         }
@@ -198,7 +195,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 feedback.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))));    
                                 creation.put(table_column_name, new SMInt(Long.parseLong(String.valueOf(create_table_contents.get(2)))));    
                             }
-                            catch (JSONException e) {
+                            catch (ParseException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }
                         }   
