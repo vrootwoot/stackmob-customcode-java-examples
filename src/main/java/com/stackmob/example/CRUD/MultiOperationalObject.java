@@ -105,7 +105,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       
       
     Object obj = parser.parse(request.getParams().get("object_operations"));
-    org.json.simple.JSONArray jsonjObject = (org.json.simple.JSONObject) obj;
+    org.json.simple.JSONObject jsonjObject = (org.json.simple.JSONObject) obj;
     org.json.simple.JSONArray array_mate=(org.json.simple.JSONArray)jsonjObject;
     
   
