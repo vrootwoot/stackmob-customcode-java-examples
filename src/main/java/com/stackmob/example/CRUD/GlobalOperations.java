@@ -114,7 +114,7 @@ public class GlobalOperations implements CustomCodeMethod {
   
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-      logger = serviceProvider.getLoggerService(MultiOperationalObject.class);
+      logger = serviceProvider.getLoggerService(GlobalOperations.class);
       logger.debug(request.getParams().get("object_operations"));
     
 
@@ -122,7 +122,7 @@ public class GlobalOperations implements CustomCodeMethod {
     
     Gson gson = new Gson();  
     JsonParser parser = new JsonParser();
-      logger.debug(parser);
+    logger.debug(parser);
     return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
 
   }
