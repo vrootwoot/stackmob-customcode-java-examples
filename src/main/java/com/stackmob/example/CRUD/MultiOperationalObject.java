@@ -133,11 +133,9 @@ public class MultiOperationalObject implements CustomCodeMethod {
 
     for (int i=0; i <= create_list.size(); i++)
     {
-            try {
-              create_tables = (JSONArray)create_list.get(i);
-            } catch (ParseException e) {
-              return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error                        
-            }            
+            
+             create_tables = (JSONArray)create_list.get(i);
+                       
             // loop through each entry which needs creating
             for (int k=0; k <= create_tables.size(); k++)
             {
