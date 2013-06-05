@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-stackmob-cc
-===========
-
-Stackmob custom code
-=======
 StackMob Custom Code Java examples
 =================================
 
@@ -21,4 +15,3 @@ Start trying Custom Code with this ready-to-go repository!
 
 
 - requires the <a href="http://marketplace.stackmob.com/module/customcode">StackMob Custom Code Module</a> to be installed for your app
->>>>>>> dbbbfde0da999b9aee9f3388c5c8052af26bbbb0

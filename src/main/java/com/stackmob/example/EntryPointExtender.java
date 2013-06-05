@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.stackmob.example;
 
 import com.stackmob.example.crud.*;
@@ -46,7 +47,6 @@ public class EntryPointExtender extends JarEntryObject {
     list.add(new UpdateObject());
     list.add(new DeleteObject());
     list.add(new ReadAllObjects());
-    list.add(new MultiOperationalObject());
     /* Equality Queries */
     list.add(new QueryByField());
     list.add(new QueryByEquality());
