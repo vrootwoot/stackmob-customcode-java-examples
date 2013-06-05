@@ -114,7 +114,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         parser.parse(request.getParams().get("object_operations"));    
     }
     catch (JsonParseException mate) {
-        return Util.internalErrorResponse("json_parse_exception", ise, errMap);  // http 500 - internal server error        
+        return Util.internalErrorResponse("json_parse_exception", mate, errMap);  // http 500 - internal server error        
     }
     
     logger.debug("hello");
