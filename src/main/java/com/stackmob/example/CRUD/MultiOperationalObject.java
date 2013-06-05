@@ -69,7 +69,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
     //JSONObject create_list_inner;
     String table_column_name;
     String table_column_data_type;    
-    JsonArray create_table_contents;
+    JsonArray create_table_contents = new JsonArray();
     JsonArray create_table_columns;
     JsonArray create_tables;
     
