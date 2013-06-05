@@ -91,7 +91,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
      * from the JSON request body
      */
     JSONParser parser = new JSONParser();
-    try {
+    
         
       //Object obj = parser.parse(request.getParams().get("object_operations"));
       //JSONObject jsonObject = (JSONObject) obj;
@@ -114,10 +114,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
       delete_list = (JSONArray)array_mate.get(1);
       update_list = (JSONArray)array_mate.get(2);
         
-    } catch (ParseException pe) {
-      logger.error(pe.getMessage(), pe);
-      return Util.badRequestResponse(errMap, pe.getMessage());
-    }
+    
     
     
     if ((create_list.size()==0) && (update_list.size()==0) && (delete_list.size()==0)){
