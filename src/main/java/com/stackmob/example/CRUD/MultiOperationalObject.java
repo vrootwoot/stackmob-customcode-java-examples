@@ -218,7 +218,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 feedback.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                                 creation.put(table_column_name, new SMLong(Long.parseLong(String.valueOf(create_table_contents.get(2)))));
                             }
-                            catch (JSONException e) {
+                            catch (ParseException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }                            
                         } else if (table_column_data_type.equals("double")) {
@@ -226,7 +226,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                                 feedback.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                                 creation.put(table_column_name, new SMDouble(Double.parseDouble(String.valueOf(create_table_contents.get(2)))));
                             }
-                            catch (JSONException e) {
+                            catch (ParseException e) {
                                 return Util.internalErrorResponse("invalid_json", e, errMap);  // http 500 - internal server error
                             }                                                        
                         } else {
@@ -249,7 +249,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
                         catch (DatastoreException dse) {
                           return Util.internalErrorResponse("datastore_exception", dse, errMap);  // http 500 - internal server error
                         }                        
-                        catch (JSONException json) {
+                        catch (ParseException json) {
                           return Util.internalErrorResponse("json_exception", json, errMap);  // http 500 - internal server error
                         }                            
             }
