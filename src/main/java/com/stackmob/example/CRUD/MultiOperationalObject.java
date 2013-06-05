@@ -22,6 +22,8 @@ import org.json.simple.JSONValue;
 
 import java.net.HttpURLConnection;
 import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This example will show a user how to write a custom code method
@@ -102,7 +104,7 @@ public class MultiOperationalObject implements CustomCodeMethod {
         
       
       
-    Object obj = JSONValue.parse(request.getParams().get("object_operations"));
+    Object obj = parser.parse(request.getParams().get("object_operations"));
     JSONObject jsonjObject = (JSONObject) obj;
     JSONArray array_mate=(JSONArray)jsonjObject;
     
