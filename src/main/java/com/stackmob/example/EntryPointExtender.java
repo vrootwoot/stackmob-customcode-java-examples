@@ -47,7 +47,6 @@ public class EntryPointExtender extends JarEntryObject {
     list.add(new DeleteObject());
     list.add(new ReadAllObjects());
     list.add(new MultiOperationalObject());
-    list.add(new GlobalOperations());
     /* Equality Queries */
     list.add(new QueryByField());
     list.add(new QueryByEquality());
