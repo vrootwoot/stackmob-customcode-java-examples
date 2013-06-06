@@ -24,10 +24,9 @@ import com.stackmob.core.rest.ResponseToProcess;
 import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
-import com.google.gson.Gson;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.inject.Inject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.net.HttpURLConnection;
 import java.util.*;
@@ -52,19 +51,29 @@ public class UpdateObject implements CustomCodeMethod {
 
   @Override
   public ResponseToProcess execute(ProcessedAPIRequest request, SDKServiceProvider serviceProvider) {
-    Map<String, SMObject> feedback = new HashMap<String, SMObject>();
-    Map<String, String> errMap = new HashMap<String, String>();
-    LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
-	Type mapType = new TypeToken<Map<String, Map>>(){}.getType();  
-	Map<String, String[]> son = new Gson().fromJson(request.getBody(), mapType);
+        LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
     logger.debug(request.getBody());
-    try {
-		
-    } catch (ParseException pe) {
-      logger.error(pe.getMessage(), pe);
-      return Util.badRequestResponse(errMap, pe.getMessage());
-    }
-    return new ResponseToProcess(HttpURLConnection.HTTP_OK, son);
+    Map<String, String> errMap = new HashMap<String, String>();
+
+    /* The following try/catch block shows how to properly fetch parameters for PUT/POST operations
+     * from the JSON request body
+     */
+JSONParser parser = new JSONParser();
+ 
+	
+		Object obj = parser.parse(request.getBody());
+ 
+		JSONObject jsonObject = (JSONObject) obj;
+ 
+		// loop array
+		JSONArray msg = (JSONArray) jsonObject.get("data");
+		Iterator<String> iterator = msg.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+
+
+    return new ResponseToProcess(HttpURLConnection.HTTP_OK, feedback);
   }
 
 }
