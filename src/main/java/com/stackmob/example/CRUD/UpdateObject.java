@@ -52,16 +52,16 @@ public class UpdateObject implements CustomCodeMethod {
     Map<String, SMObject> feedback = new HashMap<String, SMObject>();
     Map<String, String> errMap = new HashMap<String, String>();
     LoggerService logger = serviceProvider.getLoggerService(UpdateObject.class);
+	Type mapType = new TypeToken<Map<String, Map>>(){}.getType();  
+	Map<String, String[]> son = new Gson().fromJson(request.getBody(), mapType);
     logger.debug(request.getBody());
-    JSONParser parser = new JSONParser();
     try {
-		JsonElement root = new JsonParser().parse(request.getBody());
-      	String value1 = root.getAsJsonObject().get("data").getAsJsonObject().get("field1").getAsString();
+		
     } catch (ParseException pe) {
       logger.error(pe.getMessage(), pe);
       return Util.badRequestResponse(errMap, pe.getMessage());
     }
-    return new ResponseToProcess(HttpURLConnection.HTTP_OK, value1);
+    return new ResponseToProcess(HttpURLConnection.HTTP_OK, son);
   }
 
 }
