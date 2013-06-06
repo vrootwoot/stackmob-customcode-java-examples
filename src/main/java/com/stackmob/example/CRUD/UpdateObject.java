@@ -25,6 +25,9 @@ import com.stackmob.example.Util;
 import com.stackmob.sdkapi.SDKServiceProvider;
 import com.stackmob.sdkapi.*;
 import com.google.gson.Gson;
+import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
+import com.google.inject.Inject;
 
 import java.net.HttpURLConnection;
 import java.util.*;
